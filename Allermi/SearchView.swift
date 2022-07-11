@@ -70,7 +70,7 @@ struct SearchView: View {
                 ForEach(1..<5, id: \.self) { number in
                     if number != 1 { Spacer() }
                     Tools(image: icons[number-1], title: titles[number-1], destinations: "\(number)") }
-            }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+            }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
         }
     }
 }
