@@ -49,8 +49,7 @@ struct ContentView: View {
                     })
                     Spacer()
                 }
-            }.padding(EdgeInsets(top: 0, leading: scs/100, bottom: scs < 800 ? 30 : 20, trailing: scs/100))
-                .offset(x: 0, y: scs < 800 ? scs/2.2 : scs/2.33)
+            }.offset(x: 0, y: scs < 800 ? scs/2.2 : scs/2.33).padding(EdgeInsets(top: 0, leading: scs/100, bottom: scs < 800 ? 30 : 20, trailing: scs/100))
         }
     }
 }
