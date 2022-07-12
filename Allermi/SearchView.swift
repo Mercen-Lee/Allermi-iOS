@@ -26,27 +26,6 @@ struct SuperTextField: View {
     }
 }
 
-struct Tools: View {
-    var image: String
-    var title: String
-    var destinations: String
-    var body: some View {
-        VStack {
-            Button(action: {print("안뇽")}) {
-                Image(systemName: image)
-                    .font(.system(size: 27))
-                    .foregroundColor(Color(UIColor.systemBackground))
-            }
-                .frame(width: 55, height: 55)
-                .background(ColorManager.LightColor)
-                .clipShape(Circle())
-            Text(title)
-                .font(.system(size: 14, weight: .bold, design: .default))
-                .foregroundColor(.gray)
-        }.frame(width: 80)
-    }
-}
-
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
@@ -69,7 +48,27 @@ struct SearchView: View {
             HStack {
                 ForEach(1..<5, id: \.self) { number in
                     if number != 1 { Spacer() }
-                    Tools(image: icons[number-1], title: titles[number-1], destinations: "\(number)") }
+                    VStack {
+                        Button(action: {
+                            switch number {
+                                case 1: print("a")
+                                case 2: LocationSearchView()
+                                case 3: BarcodeSearchView()
+                                default: print("a")
+                            }
+                        }) {
+                            Image(systemName: icons[number-1])
+                                .font(.system(size: 27))
+                                .foregroundColor(Color(UIColor.systemBackground))
+                        }
+                            .frame(width: 55, height: 55)
+                            .background(ColorManager.LightColor)
+                            .clipShape(Circle())
+                        Text(titles[number-1])
+                            .font(.system(size: 14, weight: .bold, design: .default))
+                            .foregroundColor(.gray)
+                    }.frame(width: 80)
+                }
             }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
         }
     }

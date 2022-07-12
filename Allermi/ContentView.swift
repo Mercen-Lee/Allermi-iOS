@@ -34,17 +34,24 @@ struct ContentView: View {
             .padding(EdgeInsets(top: 0, leading: 0, bottom: scs/15, trailing: 0))
             
             VStack(spacing: 0) {
+                
                 Rectangle()
                     .fill(.gray)
                     .frame(height: 1)
+                
                 HStack {
                     ForEach(0..<5, id: \.self) { number in
                         Spacer()
                         Button(action: { self.selectedIndex = number }, label: {
                             if number == 2 { Image(systemName: icons[number])
-                                    .font(.system(size: scs/25, weight: .regular, design: .default))
-                                    .foregroundColor(Color(.systemBackground)).frame(width: scs/12, height: scs/12)
-                                    .background(selectedIndex == number ? Color.accentColor : .gray).cornerRadius(scs/10)
+                                    .font(
+                                        .system(size: scs/25, weight: .regular, design: .default))
+                                    .foregroundColor(
+                                        Color(.systemBackground))
+                                    .frame(width: scs/12, height: scs/12)
+                                    .background(
+                                        selectedIndex == number ? Color.accentColor : .gray)
+                                    .cornerRadius(scs/10)
                             }
                             else {
                                 VStack {
@@ -60,8 +67,14 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                .padding(EdgeInsets(top: scs < 800 ? 5 : 10, leading: scs/100, bottom: scs < 800 ? 30 : 30, trailing: scs/100))
-                .background(colorScheme == .dark ? Color.gray.opacity(0.3) : Color.gray.opacity(0.1))
+                .padding(EdgeInsets(
+                    top: scs < 800 ? 5 : 10,
+                    leading: scs/100,
+                    bottom: scs < 800 ? 30 : 30,
+                    trailing: scs/100))
+                
+                .background(colorScheme == .dark ?
+                            Color.gray.opacity(0.3) : Color.gray.opacity(0.1))
             }
             .offset(x: 0, y: scs < 800 ? scs/2.2 : scs/2.33)
         }

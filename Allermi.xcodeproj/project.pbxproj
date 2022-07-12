@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		935F348F287D427E0081470E /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F348E287D427E0081470E /* FirstView.swift */; };
+		935F3491287D4E7F0081470E /* BarcodeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3490287D4E7F0081470E /* BarcodeSearchView.swift */; };
+		935F3493287D4EA20081470E /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3492287D4EA20081470E /* LocationSearchView.swift */; };
+		935F3495287D50BE0081470E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3494287D50BE0081470E /* RegisterView.swift */; };
+		935F3497287D51310081470E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3496287D51310081470E /* LoginView.swift */; };
 		936655C5287B9EE400277FC6 /* AllermiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655C4287B9EE400277FC6 /* AllermiApp.swift */; };
 		936655C7287B9EE400277FC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655C6287B9EE400277FC6 /* ContentView.swift */; };
 		936655C9287B9EE500277FC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 936655C8287B9EE500277FC6 /* Assets.xcassets */; };
@@ -39,6 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		935F348E287D427E0081470E /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		935F3490287D4E7F0081470E /* BarcodeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeSearchView.swift; sourceTree = "<group>"; };
+		935F3492287D4EA20081470E /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		935F3494287D50BE0081470E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		935F3496287D51310081470E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		936655C1287B9EE400277FC6 /* 알레르미.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "알레르미.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		936655C4287B9EE400277FC6 /* AllermiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllermiApp.swift; sourceTree = "<group>"; };
 		936655C6287B9EE400277FC6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,11 +116,16 @@
 			children = (
 				936655C4287B9EE400277FC6 /* AllermiApp.swift */,
 				936655C6287B9EE400277FC6 /* ContentView.swift */,
+				935F348E287D427E0081470E /* FirstView.swift */,
+				935F3496287D51310081470E /* LoginView.swift */,
+				935F3494287D50BE0081470E /* RegisterView.swift */,
 				936655F6287BA2BA00277FC6 /* CommunityView.swift */,
 				936655F4287BA2B000277FC6 /* ProfileView.swift */,
 				936655F2287BA29500277FC6 /* HomeView.swift */,
 				936655F0287BA28500277FC6 /* HealthView.swift */,
 				936655EE287BA08200277FC6 /* SearchView.swift */,
+				935F3492287D4EA20081470E /* LocationSearchView.swift */,
+				935F3490287D4E7F0081470E /* BarcodeSearchView.swift */,
 				936655C8287B9EE500277FC6 /* Assets.xcassets */,
 				936655CA287B9EE500277FC6 /* Preview Content */,
 			);
@@ -272,13 +287,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935F3495287D50BE0081470E /* RegisterView.swift in Sources */,
 				936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */,
 				936655F1287BA28500277FC6 /* HealthView.swift in Sources */,
 				936655C7287B9EE400277FC6 /* ContentView.swift in Sources */,
 				936655EF287BA08200277FC6 /* SearchView.swift in Sources */,
 				936655F3287BA29500277FC6 /* HomeView.swift in Sources */,
+				935F3497287D51310081470E /* LoginView.swift in Sources */,
+				935F3493287D4EA20081470E /* LocationSearchView.swift in Sources */,
+				935F348F287D427E0081470E /* FirstView.swift in Sources */,
 				936655F5287BA2B000277FC6 /* ProfileView.swift in Sources */,
 				936655C5287B9EE400277FC6 /* AllermiApp.swift in Sources */,
+				935F3491287D4E7F0081470E /* BarcodeSearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
