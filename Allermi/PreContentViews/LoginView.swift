@@ -8,9 +8,22 @@
 import SwiftUI
 
 struct LoginView: View {
+    @FocusState private var isFocused: Bool
     @State private var NextView = false
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Text("아이디를 입력해주세요.")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            VStack {
+                TextField("아이디", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    .font(.system(size: 25, weight: .medium, design: .default))
+                    .focused($isFocused)
+                Rectangle()
+                    .fill(isFocused ? .accentColor : Color(.tertiarySystemFill))
+                    .frame(height: 1.6)
+            }
+            .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            Spacer()
             Button(action: { NextView = true }) {
                 Text("다음")
                     .font(.system(size: 20, weight: .bold, design: .default))
@@ -23,6 +36,7 @@ struct LoginView: View {
                 IDView()
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .padding(20)
     }
 }

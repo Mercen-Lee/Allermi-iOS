@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04711148A1E6262AFAB3E085 /* Pods_AllermiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C8A03AC7494EB8458F2DB4 /* Pods_AllermiTests.framework */; };
+		7656E74EF567AE7CD7E1522D /* Pods_Allermi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C68A21939C0590EF8D32B1 /* Pods_Allermi.framework */; };
 		935F348F287D427E0081470E /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F348E287D427E0081470E /* FirstView.swift */; };
 		935F3491287D4E7F0081470E /* BarcodeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3490287D4E7F0081470E /* BarcodeSearchView.swift */; };
 		935F3493287D4EA20081470E /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3492287D4EA20081470E /* LocationSearchView.swift */; };
@@ -25,6 +27,7 @@
 		936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F6287BA2BA00277FC6 /* CommunityView.swift */; };
 		93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D08F85287FC43300DF9E9F /* ContentView.swift */; };
 		93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */; };
+		BDD2424CA6902563472DE799 /* Pods_Allermi_AllermiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0769FDCC1924AD510B3399E6 /* Pods-Allermi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allermi.release.xcconfig"; path = "Target Support Files/Pods-Allermi/Pods-Allermi.release.xcconfig"; sourceTree = "<group>"; };
+		43F1386BE8688D5CF1608025 /* Pods-Allermi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allermi.debug.xcconfig"; path = "Target Support Files/Pods-Allermi/Pods-Allermi.debug.xcconfig"; sourceTree = "<group>"; };
+		53C4FAF5A3FABA0D5904E623 /* Pods-Allermi-AllermiUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allermi-AllermiUITests.debug.xcconfig"; path = "Target Support Files/Pods-Allermi-AllermiUITests/Pods-Allermi-AllermiUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F012182359CD232C7ABC34C /* Pods-Allermi-AllermiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Allermi-AllermiUITests.release.xcconfig"; path = "Target Support Files/Pods-Allermi-AllermiUITests/Pods-Allermi-AllermiUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allermi_AllermiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		904696CF71F7CF8B822B4B20 /* Pods-AllermiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllermiTests.debug.xcconfig"; path = "Target Support Files/Pods-AllermiTests/Pods-AllermiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		935F348E287D427E0081470E /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		935F3490287D4E7F0081470E /* BarcodeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeSearchView.swift; sourceTree = "<group>"; };
 		935F3492287D4EA20081470E /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
@@ -66,6 +75,9 @@
 		936655F6287BA2BA00277FC6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		93D08F85287FC43300DF9E9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		C5C68A21939C0590EF8D32B1 /* Pods_Allermi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allermi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1240032F2E06C3082B9DF75 /* Pods-AllermiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllermiTests.release.xcconfig"; path = "Target Support Files/Pods-AllermiTests/Pods-AllermiTests.release.xcconfig"; sourceTree = "<group>"; };
+		E8C8A03AC7494EB8458F2DB4 /* Pods_AllermiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllermiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7656E74EF567AE7CD7E1522D /* Pods_Allermi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04711148A1E6262AFAB3E085 /* Pods_AllermiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,12 +101,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD2424CA6902563472DE799 /* Pods_Allermi_AllermiUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E278EEFBFC0DAE52FC35B81 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43F1386BE8688D5CF1608025 /* Pods-Allermi.debug.xcconfig */,
+				0769FDCC1924AD510B3399E6 /* Pods-Allermi.release.xcconfig */,
+				53C4FAF5A3FABA0D5904E623 /* Pods-Allermi-AllermiUITests.debug.xcconfig */,
+				6F012182359CD232C7ABC34C /* Pods-Allermi-AllermiUITests.release.xcconfig */,
+				904696CF71F7CF8B822B4B20 /* Pods-AllermiTests.debug.xcconfig */,
+				D1240032F2E06C3082B9DF75 /* Pods-AllermiTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		91AE252B128F8FF96C336213 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5C68A21939C0590EF8D32B1 /* Pods_Allermi.framework */,
+				7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */,
+				E8C8A03AC7494EB8458F2DB4 /* Pods_AllermiTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		936655B8287B9EE400277FC6 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +139,8 @@
 				936655D4287B9EE500277FC6 /* AllermiTests */,
 				936655DE287B9EE500277FC6 /* AllermiUITests */,
 				936655C2287B9EE400277FC6 /* Products */,
+				8E278EEFBFC0DAE52FC35B81 /* Pods */,
+				91AE252B128F8FF96C336213 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,8 +195,8 @@
 		939F7E51287FC7800016175A /* ContentViews */ = {
 			isa = PBXGroup;
 			children = (
-				939F7E53287FC7E10016175A /* MinorSearchViews */,
 				93D08F85287FC43300DF9E9F /* ContentView.swift */,
+				939F7E53287FC7E10016175A /* MinorSearchViews */,
 				936655F2287BA29500277FC6 /* HomeView.swift */,
 				936655F6287BA2BA00277FC6 /* CommunityView.swift */,
 				936655EE287BA08200277FC6 /* SearchView.swift */,
@@ -191,9 +232,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 936655E5287B9EE500277FC6 /* Build configuration list for PBXNativeTarget "Allermi" */;
 			buildPhases = (
+				9452B9C3E818B3E2A152410B /* [CP] Check Pods Manifest.lock */,
 				936655BD287B9EE400277FC6 /* Sources */,
 				936655BE287B9EE400277FC6 /* Frameworks */,
 				936655BF287B9EE400277FC6 /* Resources */,
+				BF40D4C4143F5F787B986143 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,6 +251,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 936655E8287B9EE500277FC6 /* Build configuration list for PBXNativeTarget "AllermiTests" */;
 			buildPhases = (
+				FB93C885FE388F32FD657772 /* [CP] Check Pods Manifest.lock */,
 				936655CD287B9EE500277FC6 /* Sources */,
 				936655CE287B9EE500277FC6 /* Frameworks */,
 				936655CF287B9EE500277FC6 /* Resources */,
@@ -226,9 +270,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 936655EB287B9EE500277FC6 /* Build configuration list for PBXNativeTarget "AllermiUITests" */;
 			buildPhases = (
+				FD6D20C9F88FD8E6BBFC3707 /* [CP] Check Pods Manifest.lock */,
 				936655D7287B9EE500277FC6 /* Sources */,
 				936655D8287B9EE500277FC6 /* Frameworks */,
 				936655D9287B9EE500277FC6 /* Resources */,
+				E916DDCB32260AA7D1CC8B8F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -309,6 +355,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9452B9C3E818B3E2A152410B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Allermi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF40D4C4143F5F787B986143 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Allermi/Pods-Allermi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Allermi/Pods-Allermi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Allermi/Pods-Allermi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E916DDCB32260AA7D1CC8B8F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Allermi-AllermiUITests/Pods-Allermi-AllermiUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Allermi-AllermiUITests/Pods-Allermi-AllermiUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Allermi-AllermiUITests/Pods-Allermi-AllermiUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB93C885FE388F32FD657772 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AllermiTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD6D20C9F88FD8E6BBFC3707 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Allermi-AllermiUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		936655BD287B9EE400277FC6 /* Sources */ = {
@@ -479,6 +628,7 @@
 		};
 		936655E6287B9EE500277FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43F1386BE8688D5CF1608025 /* Pods-Allermi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,6 +659,7 @@
 		};
 		936655E7287B9EE500277FC6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0769FDCC1924AD510B3399E6 /* Pods-Allermi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -539,6 +690,7 @@
 		};
 		936655E9287B9EE500277FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 904696CF71F7CF8B822B4B20 /* Pods-AllermiTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -559,6 +711,7 @@
 		};
 		936655EA287B9EE500277FC6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1240032F2E06C3082B9DF75 /* Pods-AllermiTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -579,6 +732,7 @@
 		};
 		936655EC287B9EE500277FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53C4FAF5A3FABA0D5904E623 /* Pods-Allermi-AllermiUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -597,6 +751,7 @@
 		};
 		936655ED287B9EE500277FC6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F012182359CD232C7ABC34C /* Pods-Allermi-AllermiUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
