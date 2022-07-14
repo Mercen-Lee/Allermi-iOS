@@ -42,7 +42,7 @@ struct FirstView: View {
                 }
             }
             .padding(20)
-            .navigationBarTitle("이전")
+            .navigationBarTitle("")
             .navigationBarHidden(true)
         }
     }

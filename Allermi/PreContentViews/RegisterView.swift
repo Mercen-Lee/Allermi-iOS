@@ -8,9 +8,125 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Text("세상 모든\n알레르기 환자를 위하여")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            Text("알레르미는 식품 알레르기로부터\n안전한 세상을 만듭니다.")
+                .font(.system(size: 20, weight: .medium, design: .default))
+                .padding(EdgeInsets(top: 1, leading: 0, bottom: 0, trailing: 0))
+                .foregroundColor(.gray)
+            Spacer()
+            NavigationLink(destination: IDView()) {
+                Text("가입하기")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color(.systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("")
+        .padding(20)
+    }
+}
+
+struct IDView: View {
+    @FocusState private var isFocused: Bool
+    @State private var NextView = false
+    @State var registerId: String = ""
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("아이디를 입력해주세요.")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            VStack {
+                TextField("아이디", text: $registerId)
+                    .font(.system(size: 25, weight: .medium, design: .default))
+                    .focused($isFocused)
+                Rectangle()
+                    .fill(isFocused ? .accentColor : Color(.tertiarySystemFill))
+                    .frame(height: 1.6)
+            }
+            .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            Spacer()
+            NavigationLink(destination: PWView()) {
+                Text("다음")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color(.systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("")
+        .padding(20)
+    }
+}
+
+struct PWView: View {
+    @FocusState private var isFocused: Bool
+    @State private var NextView = false
+    @State var registerPw: String = ""
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("비밀번호를 입력해주세요.")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            VStack {
+                SecureField("비밀번호", text: $registerPw)
+                    .font(.system(size: 25, weight: .medium, design: .default))
+                    .focused($isFocused)
+                Rectangle()
+                    .fill(isFocused ? .accentColor : Color(.tertiarySystemFill))
+                    .frame(height: 1.6)
+            }
+            .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            Spacer()
+            NavigationLink(destination: EndView()) {
+                Text("다음")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color(.systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+            }
+            .sheet(isPresented: $NextView) {
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("")
+        .padding(20)
+    }
+}
+
+struct EndView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("회원가입 완료")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            Text("환영합니다!\n시작하기 버튼을 눌러 시작하세요.")
+                .font(.system(size: 20, weight: .medium, design: .default))
+                .padding(EdgeInsets(top: 1, leading: 0, bottom: 0, trailing: 0))
+                .foregroundColor(.gray)
+            Spacer()
+            NavigationLink(destination: ContentView()) {
+                Text("시작하기")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color(.systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(true)
+        .padding(20)
     }
 }
 
