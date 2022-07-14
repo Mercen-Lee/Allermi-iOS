@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ContentVIew.swift
 //  Allermi
 //
 //  Created by Mercen on 2022/07/11.

@@ -13,7 +13,6 @@
 		935F3495287D50BE0081470E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3494287D50BE0081470E /* RegisterView.swift */; };
 		935F3497287D51310081470E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3496287D51310081470E /* LoginView.swift */; };
 		936655C5287B9EE400277FC6 /* AllermiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655C4287B9EE400277FC6 /* AllermiApp.swift */; };
-		936655C7287B9EE400277FC6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655C6287B9EE400277FC6 /* ContentView.swift */; };
 		936655C9287B9EE500277FC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 936655C8287B9EE500277FC6 /* Assets.xcassets */; };
 		936655CC287B9EE500277FC6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 936655CB287B9EE500277FC6 /* Preview Assets.xcassets */; };
 		936655D6287B9EE500277FC6 /* AllermiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655D5287B9EE500277FC6 /* AllermiTests.swift */; };
@@ -24,6 +23,8 @@
 		936655F3287BA29500277FC6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F2287BA29500277FC6 /* HomeView.swift */; };
 		936655F5287BA2B000277FC6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F4287BA2B000277FC6 /* ProfileView.swift */; };
 		936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F6287BA2BA00277FC6 /* CommunityView.swift */; };
+		93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D08F85287FC43300DF9E9F /* ContentView.swift */; };
+		93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +52,6 @@
 		935F3496287D51310081470E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		936655C1287B9EE400277FC6 /* 알레르미.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "알레르미.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		936655C4287B9EE400277FC6 /* AllermiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllermiApp.swift; sourceTree = "<group>"; };
-		936655C6287B9EE400277FC6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		936655C8287B9EE500277FC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		936655CB287B9EE500277FC6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		936655D1287B9EE500277FC6 /* AllermiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllermiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +64,8 @@
 		936655F2287BA29500277FC6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		936655F4287BA2B000277FC6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		936655F6287BA2BA00277FC6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		93D08F85287FC43300DF9E9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		936655B8287B9EE400277FC6 = {
 			isa = PBXGroup;
 			children = (
+				93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */,
 				936655C3287B9EE400277FC6 /* Allermi */,
 				936655D4287B9EE500277FC6 /* AllermiTests */,
 				936655DE287B9EE500277FC6 /* AllermiUITests */,
@@ -115,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				936655C4287B9EE400277FC6 /* AllermiApp.swift */,
-				936655C6287B9EE400277FC6 /* ContentView.swift */,
+				93D08F85287FC43300DF9E9F /* ContentView.swift */,
 				935F348E287D427E0081470E /* FirstView.swift */,
 				935F3496287D51310081470E /* LoginView.swift */,
 				935F3494287D50BE0081470E /* RegisterView.swift */,
@@ -261,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */,
 				936655CC287B9EE500277FC6 /* Preview Assets.xcassets in Resources */,
 				936655C9287B9EE500277FC6 /* Assets.xcassets in Resources */,
 			);
@@ -290,13 +294,13 @@
 				935F3495287D50BE0081470E /* RegisterView.swift in Sources */,
 				936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */,
 				936655F1287BA28500277FC6 /* HealthView.swift in Sources */,
-				936655C7287B9EE400277FC6 /* ContentView.swift in Sources */,
 				936655EF287BA08200277FC6 /* SearchView.swift in Sources */,
 				936655F3287BA29500277FC6 /* HomeView.swift in Sources */,
 				935F3497287D51310081470E /* LoginView.swift in Sources */,
 				935F3493287D4EA20081470E /* LocationSearchView.swift in Sources */,
 				935F348F287D427E0081470E /* FirstView.swift in Sources */,
 				936655F5287BA2B000277FC6 /* ProfileView.swift in Sources */,
+				93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */,
 				936655C5287B9EE400277FC6 /* AllermiApp.swift in Sources */,
 				935F3491287D4E7F0081470E /* BarcodeSearchView.swift in Sources */,
 			);
@@ -463,6 +467,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -492,6 +497,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct AllermiApp: App {
+    public let token = UserDefaults.standard.string(forKey: "token")
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if token != nil {
+                ContentView()
+            } else { FirstView() }
         }
     }
 }
