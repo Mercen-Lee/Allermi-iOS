@@ -22,8 +22,8 @@ struct LoginView: View {
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused1)
                 Rectangle()
-                    .fill(isFocused1 ? .accentColor : Color(.tertiarySystemFill))
-                    .frame(height: 1.6)
+                    .fill(isFocused1 ? .accentColor : Color(.systemGray3))
+                    .frame(height: 1.3)
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
             VStack {
@@ -31,8 +31,8 @@ struct LoginView: View {
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused2)
                 Rectangle()
-                    .fill(isFocused2 ? .accentColor : Color(.tertiarySystemFill))
-                    .frame(height: 1.6)
+                    .fill(isFocused2 ? .accentColor : Color(.systemGray3))
+                    .frame(height: 1.3)
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
             Spacer()

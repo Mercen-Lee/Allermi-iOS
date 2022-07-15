@@ -35,7 +35,6 @@ struct RegisterView: View {
 
 struct IDView: View {
     @FocusState private var isFocused: Bool
-    @State private var NextView = false
     @State var registerId: String = ""
     var body: some View {
         VStack(alignment: .leading) {
@@ -46,8 +45,8 @@ struct IDView: View {
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused)
                 Rectangle()
-                    .fill(isFocused ? .accentColor : Color(.tertiarySystemFill))
-                    .frame(height: 1.6)
+                    .fill(isFocused ? .accentColor : Color(.systemGray3))
+                    .frame(height: 1.3)
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
             Spacer()
@@ -69,7 +68,6 @@ struct IDView: View {
 
 struct PWView: View {
     @FocusState private var isFocused: Bool
-    @State private var NextView = false
     @State var registerPw: String = ""
     var body: some View {
         VStack(alignment: .leading) {
@@ -80,10 +78,22 @@ struct PWView: View {
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused)
                 Rectangle()
-                    .fill(isFocused ? .accentColor : Color(.tertiarySystemFill))
-                    .frame(height: 1.6)
+                    .fill(isFocused ? .accentColor : Color(.systemGray3))
+                    .frame(height: 1.3)
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            HStack(spacing: 0) {
+                Text("8자리 이상의 ")
+                    .foregroundColor(registerPw.count >= 8 ? .accentColor : Color(.systemGray3))
+                Text("숫자")
+                    .foregroundColor(registerPw.count != 0 && registerPw.filter("0123456789.".contains).count != 0 ? .accentColor : Color(.systemGray3))
+                Text("와 ")
+                    .foregroundColor(registerPw.count != 0 && registerPw.filter("0123456789.".contains).count != 0 && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
+                Text("문자")
+                    .foregroundColor(registerPw.count != 0 && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
+                Text(" 조합")
+                    .foregroundColor(registerPw.count != 0 && registerPw.filter("0123456789.".contains).count != 0 && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
+            }
             Spacer()
             NavigationLink(destination: EndView()) {
                 Text("다음")
@@ -94,8 +104,7 @@ struct PWView: View {
                     .foregroundColor(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 24))
             }
-            .sheet(isPresented: $NextView) {
-            }
+            .disabled(registerPw.count < 8 || registerPw.filter("0123456789.".contains).count == 0 || Int(registerPw) != nil)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
@@ -103,6 +112,13 @@ struct PWView: View {
     }
 }
 
+struct AllergyView: View {
+    var body: some View {
+        VStack {
+            
+        }
+    }
+}
 struct EndView: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -132,6 +148,6 @@ struct EndView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        PWView()
     }
 }
