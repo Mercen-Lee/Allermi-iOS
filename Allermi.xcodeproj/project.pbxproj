@@ -27,6 +27,8 @@
 		936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F6287BA2BA00277FC6 /* CommunityView.swift */; };
 		93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D08F85287FC43300DF9E9F /* ContentView.swift */; };
 		93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */; };
+		93D71DB5288526C900F9DA52 /* DEVELOPERS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D71DB4288526C900F9DA52 /* DEVELOPERS.swift */; };
+		93D71DB72885324B00F9DA52 /* SearchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D71DB62885324B00F9DA52 /* SearchedView.swift */; };
 		BDD2424CA6902563472DE799 /* Pods_Allermi_AllermiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		93D01D742881053E006D0850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93D08F85287FC43300DF9E9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		93D71DB4288526C900F9DA52 /* DEVELOPERS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DEVELOPERS.swift; sourceTree = "<group>"; };
+		93D71DB62885324B00F9DA52 /* SearchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedView.swift; sourceTree = "<group>"; };
 		C5C68A21939C0590EF8D32B1 /* Pods_Allermi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allermi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1240032F2E06C3082B9DF75 /* Pods-AllermiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllermiTests.release.xcconfig"; path = "Target Support Files/Pods-AllermiTests/Pods-AllermiTests.release.xcconfig"; sourceTree = "<group>"; };
 		E8C8A03AC7494EB8458F2DB4 /* Pods_AllermiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllermiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +164,7 @@
 				93D01D742881053E006D0850 /* Info.plist */,
 				93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */,
 				936655C4287B9EE400277FC6 /* AllermiApp.swift */,
+				93D71DB4288526C900F9DA52 /* DEVELOPERS.swift */,
 				939F7E52287FC7BE0016175A /* PreContentViews */,
 				939F7E51287FC7800016175A /* ContentViews */,
 				936655C8287B9EE500277FC6 /* Assets.xcassets */,
@@ -222,6 +227,7 @@
 			children = (
 				935F3492287D4EA20081470E /* LocationSearchView.swift */,
 				935F3490287D4E7F0081470E /* BarcodeSearchView.swift */,
+				93D71DB62885324B00F9DA52 /* SearchedView.swift */,
 			);
 			path = MinorSearchViews;
 			sourceTree = "<group>";
@@ -469,10 +475,12 @@
 				936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */,
 				936655F1287BA28500277FC6 /* HealthView.swift in Sources */,
 				936655EF287BA08200277FC6 /* SearchView.swift in Sources */,
+				93D71DB5288526C900F9DA52 /* DEVELOPERS.swift in Sources */,
 				936655F3287BA29500277FC6 /* HomeView.swift in Sources */,
 				935F3497287D51310081470E /* LoginView.swift in Sources */,
 				935F3493287D4EA20081470E /* LocationSearchView.swift in Sources */,
 				935F348F287D427E0081470E /* FirstView.swift in Sources */,
+				93D71DB72885324B00F9DA52 /* SearchedView.swift in Sources */,
 				936655F5287BA2B000277FC6 /* ProfileView.swift in Sources */,
 				93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */,
 				936655C5287B9EE400277FC6 /* AllermiApp.swift in Sources */,
