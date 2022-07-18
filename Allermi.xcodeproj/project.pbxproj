@@ -73,6 +73,7 @@
 		936655F2287BA29500277FC6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		936655F4287BA2B000277FC6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		936655F6287BA2BA00277FC6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		93D01D742881053E006D0850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93D08F85287FC43300DF9E9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C5C68A21939C0590EF8D32B1 /* Pods_Allermi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allermi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +119,6 @@
 				904696CF71F7CF8B822B4B20 /* Pods-AllermiTests.debug.xcconfig */,
 				D1240032F2E06C3082B9DF75 /* Pods-AllermiTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -157,6 +157,7 @@
 		936655C3287B9EE400277FC6 /* Allermi */ = {
 			isa = PBXGroup;
 			children = (
+				93D01D742881053E006D0850 /* Info.plist */,
 				93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */,
 				936655C4287B9EE400277FC6 /* AllermiApp.swift */,
 				939F7E52287FC7BE0016175A /* PreContentViews */,
@@ -638,6 +639,7 @@
 				DEVELOPMENT_TEAM = 56V747V83R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Allermi/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -669,6 +671,7 @@
 				DEVELOPMENT_TEAM = 56V747V83R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Allermi/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

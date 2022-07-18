@@ -10,6 +10,14 @@ import SwiftUI
 public let scs = UIScreen.main.bounds.size.height
 public let scw = UIScreen.main.bounds.size.width
 
+extension View {
+    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove { self.hidden() }
+        } else { self }
+    }
+}
+
 struct ColorManager {
     static let LightColor = Color("LightColor")
 }

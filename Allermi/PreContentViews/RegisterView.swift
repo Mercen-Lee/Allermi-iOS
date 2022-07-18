@@ -38,7 +38,7 @@ struct IDView: View {
     @State var registerId: String = ""
     var body: some View {
         VStack(alignment: .leading) {
-            Text("아이디를 입력해주세요.")
+            Text("아이디를 생성해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
             VStack {
                 TextField("아이디", text: $registerId)
@@ -49,6 +49,12 @@ struct IDView: View {
                     .frame(height: 1.3)
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            HStack(spacing: 0) {
+                Text("16자리 이하의 ")
+                    .foregroundColor(registerId.count != 0 && registerId.count <= 16 ? .accentColor : Color(.systemGray3))
+                Text("숫자나 문자")
+                    .foregroundColor(registerId.count != 0 ? .accentColor : Color(.systemGray3))
+            }
             Spacer()
             NavigationLink(destination: PWView()) {
                 Text("다음")
@@ -59,6 +65,7 @@ struct IDView: View {
                     .foregroundColor(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 24))
             }
+            .disabled(registerId.count == 0 || registerId.count > 16)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
@@ -71,7 +78,7 @@ struct PWView: View {
     @State var registerPw: String = ""
     var body: some View {
         VStack(alignment: .leading) {
-            Text("비밀번호를 입력해주세요.")
+            Text("비밀번호를 생성해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
             VStack {
                 SecureField("비밀번호", text: $registerPw)
@@ -86,13 +93,13 @@ struct PWView: View {
                 Text("8자리 이상의 ")
                     .foregroundColor(registerPw.count >= 8 ? .accentColor : Color(.systemGray3))
                 Text("숫자")
-                    .foregroundColor(registerPw.count != 0 && registerPw.filter("0123456789.".contains).count != 0 ? .accentColor : Color(.systemGray3))
+                    .foregroundColor(!registerPw.isEmpty && !registerPw.filter("0123456789.".contains).isEmpty ? .accentColor : Color(.systemGray3))
                 Text("와 ")
-                    .foregroundColor(registerPw.count != 0 && registerPw.filter("0123456789.".contains).count != 0 && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
+                    .foregroundColor(!registerPw.isEmpty && !registerPw.filter("0123456789.".contains).isEmpty && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
                 Text("문자")
-                    .foregroundColor(registerPw.count != 0 && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
+                    .foregroundColor(!registerPw.isEmpty && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
                 Text(" 조합")
-                    .foregroundColor(registerPw.count != 0 && registerPw.filter("0123456789.".contains).count != 0 && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
+                    .foregroundColor(!registerPw.isEmpty && !registerPw.filter("0123456789.".contains).isEmpty && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
             }
             Spacer()
             NavigationLink(destination: EndView()) {
@@ -104,7 +111,7 @@ struct PWView: View {
                     .foregroundColor(Color(.systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 24))
             }
-            .disabled(registerPw.count < 8 || registerPw.filter("0123456789.".contains).count == 0 || Int(registerPw) != nil)
+            .disabled(registerPw.count < 8 || registerPw.filter("0123456789.".contains).isEmpty || Int(registerPw) != nil)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
@@ -148,6 +155,6 @@ struct EndView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        PWView()
+        AllergyView()
     }
 }
