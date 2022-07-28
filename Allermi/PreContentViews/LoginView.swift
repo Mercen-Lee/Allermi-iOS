@@ -31,7 +31,7 @@ struct LoginView: View {
             Text("알레르미 로그인")
                 .font(.system(size: 30, weight: .bold, design: .default))
             VStack {
-                TextField("아이디", text: $loginId)
+                TextField("닉네임", text: $loginId)
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused1)
                 Rectangle()
@@ -40,7 +40,7 @@ struct LoginView: View {
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
             .modifier(ShakeEffect(animatableData: CGFloat(invalidId)))
-            Text("없는 아이디입니다")
+            Text("없는 닉네임입니다")
                 .foregroundColor(.accentColor)
                 .isHidden(!emptyId || loginId.count != 0)
             VStack {

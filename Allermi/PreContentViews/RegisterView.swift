@@ -38,10 +38,10 @@ struct IDView: View {
     @State var registerId: String = ""
     var body: some View {
         VStack(alignment: .leading) {
-            Text("아이디를 생성해주세요.")
+            Text("닉네임을 생성해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
             VStack {
-                TextField("아이디", text: $registerId)
+                TextField("닉네임", text: $registerId)
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused)
                 Rectangle()
@@ -102,7 +102,7 @@ struct PWView: View {
                     .foregroundColor(!registerPw.isEmpty && !registerPw.filter("0123456789.".contains).isEmpty && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
             }
             Spacer()
-            NavigationLink(destination: EndView()) {
+            NavigationLink(destination: AllergyView()) {
                 Text("다음")
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .frame(maxWidth: .infinity)
@@ -120,12 +120,40 @@ struct PWView: View {
 }
 
 struct AllergyView: View {
+    @FocusState private var isFocused: Bool
+    @State var allergySearch: String = ""
+    @State var allergyList = [Int]()
     var body: some View {
-        VStack {
-            
+        VStack(alignment: .leading) {
+            Text("알레르기를 선택해주세요.")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            VStack {
+                TextField("검색", text: $allergySearch)
+                    .font(.system(size: 25, weight: .medium, design: .default))
+                    .focused($isFocused)
+                Rectangle()
+                    .fill(isFocused ? .accentColor : Color(.systemGray3))
+                    .frame(height: 1.3)
+            }
+            .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            Spacer()
+            NavigationLink(destination: EndView()) {
+                Text("다음")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 60)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color(.systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+            }
+            .disabled(allergyList.isEmpty)
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("")
+        .padding(20)
     }
 }
+
 struct EndView: View {
     var body: some View {
         VStack(alignment: .leading) {
