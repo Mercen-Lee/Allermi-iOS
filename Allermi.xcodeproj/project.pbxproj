@@ -29,6 +29,7 @@
 		93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */; };
 		93D71DB5288526C900F9DA52 /* DEVELOPERS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D71DB4288526C900F9DA52 /* DEVELOPERS.swift */; };
 		93D71DB72885324B00F9DA52 /* SearchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D71DB62885324B00F9DA52 /* SearchedView.swift */; };
+		93EC3BC4289ABF6E003A8CCF /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 93EC3BC3289ABF6E003A8CCF /* CodeScanner */; };
 		BDD2424CA6902563472DE799 /* Pods_Allermi_AllermiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93EC3BC4289ABF6E003A8CCF /* CodeScanner in Frameworks */,
 				7656E74EF567AE7CD7E1522D /* Pods_Allermi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +252,9 @@
 			dependencies = (
 			);
 			name = Allermi;
+			packageProductDependencies = (
+				93EC3BC3289ABF6E003A8CCF /* CodeScanner */,
+			);
 			productName = Allermi;
 			productReference = 936655C1287B9EE400277FC6 /* 알레르미.app */;
 			productType = "com.apple.product-type.application";
@@ -325,6 +330,9 @@
 				Base,
 			);
 			mainGroup = 936655B8287B9EE400277FC6;
+			packageReferences = (
+				93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = 936655C2287B9EE400277FC6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -821,6 +829,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		93EC3BC3289ABF6E003A8CCF /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 936655B9287B9EE400277FC6 /* Project object */;
 }

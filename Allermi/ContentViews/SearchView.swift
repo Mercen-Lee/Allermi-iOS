@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CodeScanner
 
 struct SuperTextField: View {
     var placeholder: Text
@@ -29,6 +30,7 @@ struct SuperTextField: View {
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
+    @State var barcodeSearch = false
     let icons = ["link", "location.fill", "barcode", "mic.fill"]
     let titles = ["링크로 검색", "위치로 검색", "바코드 검색", "음성 검색"]
     var body: some View {
@@ -53,7 +55,7 @@ struct SearchView: View {
                             switch number {
                                 case 1: print("a")
                                 case 2: LocationSearchView()
-                                case 3: BarcodeSearchView()
+                            case 3: barcodeSearch.toggle()
                                 default: print("a")
                             }
                         }) {
@@ -70,6 +72,19 @@ struct SearchView: View {
                     }.frame(width: 80)
                 }
             }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+        }
+        .sheet(isPresented: $barcodeSearch) {
+            CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801105915075", completion: handleScan)
+        }
+    }
+    func handleScan(result: Result<ScanResult, ScanError>) {
+       barcodeSearch = false
+        switch result {
+        case .success(let result):
+            let details = result.string.components
+            print(details)
+        case .failure(let error):
+            print("Scanning failed: \(error.localizedDescription)")
         }
     }
 }
