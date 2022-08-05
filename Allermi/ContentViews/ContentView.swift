@@ -39,7 +39,7 @@ struct ContentView: View {
                     default: ProfileView()
                 }
             }
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: scs/15, trailing: 0))
+            .padding(.bottom, scs < 800 ? scs/10 : scs/11.3)
             
             VStack(spacing: 0) {
                 

@@ -137,7 +137,7 @@ struct ScanOverlayView: View {
             VStack {
                 Capsule()
                         .fill(.white)
-                        .frame(width: 130, height: 4)
+                        .frame(width: 50, height: 4)
                         .padding(10)
                 Spacer()
                 Text("바코드를 인식해 검색합니다")
