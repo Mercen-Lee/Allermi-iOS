@@ -10,7 +10,6 @@
 		04711148A1E6262AFAB3E085 /* Pods_AllermiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C8A03AC7494EB8458F2DB4 /* Pods_AllermiTests.framework */; };
 		7656E74EF567AE7CD7E1522D /* Pods_Allermi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C68A21939C0590EF8D32B1 /* Pods_Allermi.framework */; };
 		935F348F287D427E0081470E /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F348E287D427E0081470E /* FirstView.swift */; };
-		935F3491287D4E7F0081470E /* BarcodeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3490287D4E7F0081470E /* BarcodeSearchView.swift */; };
 		935F3493287D4EA20081470E /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3492287D4EA20081470E /* LocationSearchView.swift */; };
 		935F3495287D50BE0081470E /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3494287D50BE0081470E /* RegisterView.swift */; };
 		935F3497287D51310081470E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F3496287D51310081470E /* LoginView.swift */; };
@@ -59,7 +58,6 @@
 		7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Allermi_AllermiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		904696CF71F7CF8B822B4B20 /* Pods-AllermiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllermiTests.debug.xcconfig"; path = "Target Support Files/Pods-AllermiTests/Pods-AllermiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		935F348E287D427E0081470E /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
-		935F3490287D4E7F0081470E /* BarcodeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeSearchView.swift; sourceTree = "<group>"; };
 		935F3492287D4EA20081470E /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		935F3494287D50BE0081470E /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		935F3496287D51310081470E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				935F3492287D4EA20081470E /* LocationSearchView.swift */,
-				935F3490287D4E7F0081470E /* BarcodeSearchView.swift */,
 				93D71DB62885324B00F9DA52 /* SearchedView.swift */,
 			);
 			path = MinorSearchViews;
@@ -504,7 +501,6 @@
 				936655F5287BA2B000277FC6 /* ProfileView.swift in Sources */,
 				93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */,
 				936655C5287B9EE400277FC6 /* AllermiApp.swift in Sources */,
-				935F3491287D4E7F0081470E /* BarcodeSearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

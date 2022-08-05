@@ -33,6 +33,7 @@ struct SuperTextField: View {
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
+    @State var search = false
     @State var barcodeSearch = false
     @State var voiceSearch = false
     let icons = ["link", "location.fill", "barcode", "mic.fill"]
@@ -51,6 +52,8 @@ struct SearchView: View {
                     .background(colorScheme == .dark ? Color.gray.opacity(0.3) : Color.gray.opacity(0.1)))
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 15, trailing: 20))
+                .onSubmit{ search.toggle() }
+            NavigationLink(destination: SearchedView(text: text), isActive: $search) { EmptyView() }
             HStack {
                 ForEach(1..<5, id: \.self) { number in
                     if number != 1 { Spacer() }
@@ -87,15 +90,17 @@ struct SearchView: View {
         }
     }
     func handleScan(result: Result<ScanResult, ScanError>) {
-       barcodeSearch = false
+        barcodeSearch = false
         switch result {
-        case .success(let result):
-            let details = result.string
-            AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
-                text = JSON(response.data!)["C005"]["row"][0]["PRDLST_NM"].string ?? "" }
-        case .failure(let error):
-            print("Scanning failed: \(error.localizedDescription)")
-        }
+            case .success(let result):
+                let details = result.string
+                AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
+                    text = JSON(response.data!)["C005"]["row"][0]["PRDLST_NM"].string ?? ""
+                    search.toggle()
+                }
+            case .failure(let error):
+                print("Scanning failed: \(error.localizedDescription)")
+            }
     }
 }
 

@@ -86,6 +86,7 @@ struct ContentView: View {
             }
             .offset(x: 0, y: scs < 800 ? scs/2.2 : scs/2.33)
         }
+        .navigationBarTitle("")
         .navigationBarHidden(true)
     }
 }

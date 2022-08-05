@@ -14,6 +14,7 @@ struct CommunityView: View {
                 Text("Nickname")
             }
         }
+        .refreshable { }
     }
 }
 
