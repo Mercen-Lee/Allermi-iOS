@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CodeScanner
 
 struct SearchedView: View {
     var body: some View {

@@ -7,6 +7,9 @@
 
 import SwiftUI
 import CodeScanner
+import SwiftSpeech
+import Alamofire
+import SwiftyJSON
 
 struct SuperTextField: View {
     var placeholder: Text
@@ -31,6 +34,7 @@ struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
     @State var barcodeSearch = false
+    @State var voiceSearch = false
     let icons = ["link", "location.fill", "barcode", "mic.fill"]
     let titles = ["링크로 검색", "위치로 검색", "바코드 검색", "음성 검색"]
     var body: some View {
@@ -56,7 +60,7 @@ struct SearchView: View {
                                 case 1: print("a")
                                 case 2: LocationSearchView()
                             case 3: barcodeSearch.toggle()
-                                default: print("a")
+                            default: voiceSearch.toggle()
                             }
                         }) {
                             Image(systemName: icons[number-1])
@@ -74,17 +78,159 @@ struct SearchView: View {
             }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
         }
         .sheet(isPresented: $barcodeSearch) {
-            CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801105915075", completion: handleScan)
+            CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801037018332", completion: handleScan)
+                .overlay(ScanOverlayView())
+                .ignoresSafeArea()
+        }
+        .sheet(isPresented: $voiceSearch) {
+            SpeechView()
         }
     }
     func handleScan(result: Result<ScanResult, ScanError>) {
        barcodeSearch = false
         switch result {
         case .success(let result):
-            let details = result.string.components
-            print(details)
+            let details = result.string
+            AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
+                text = JSON(response.data!)["C005"]["row"][0]["PRDLST_NM"].string ?? "" }
         case .failure(let error):
             print("Scanning failed: \(error.localizedDescription)")
+        }
+    }
+}
+
+struct ScanOverlayView: View {
+    var body: some View {
+        ZStack {
+            GeometryReader { geometry in
+                let cutoutWidth: CGFloat = min(geometry.size.width, geometry.size.height) / 1.5
+
+                ZStack {
+                    Rectangle()
+                        .fill(Color.black.opacity(0.5))
+                        
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.black)
+                        .frame(width: cutoutWidth, height: cutoutWidth, alignment: .center)
+                        .blendMode(.destinationOut)
+                }.compositingGroup()
+                
+                Path { path in
+                    
+                    let left = (geometry.size.width - cutoutWidth) / 2.0
+                    let right = left + cutoutWidth
+                    let top = (geometry.size.height - cutoutWidth) / 2.0
+                    let bottom = top + cutoutWidth
+                    
+                    path.addPath(
+                        createCornersPath(
+                            left: left, top: top,
+                            right: right, bottom: bottom,
+                            cornerRadius: 40, cornerLength: 20
+                        )
+                    )
+                }
+                .stroke(Color.accentColor, lineWidth: 8)
+                .frame(width: cutoutWidth, height: cutoutWidth, alignment: .center)
+                .aspectRatio(1, contentMode: .fit)
+            }
+            VStack {
+                Capsule()
+                        .fill(.white)
+                        .frame(width: 130, height: 4)
+                        .padding(10)
+                Spacer()
+                Text("바코드를 인식해 검색합니다")
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 350)
+                Spacer()
+            }
+        }
+    }
+    
+    private func createCornersPath(
+        left: CGFloat,
+        top: CGFloat,
+        right: CGFloat,
+        bottom: CGFloat,
+        cornerRadius: CGFloat,
+        cornerLength: CGFloat
+    ) -> Path {
+        var path = Path()
+
+        path.move(to: CGPoint(x: left, y: (top + cornerRadius / 2.0)))
+        path.addArc(
+            center: CGPoint(x: (left + cornerRadius / 2.0), y: (top + cornerRadius / 2.0)),
+            radius: cornerRadius / 2.0,
+            startAngle: Angle(degrees: 180.0),
+            endAngle: Angle(degrees: 270.0),
+            clockwise: false
+        )
+
+        path.move(to: CGPoint(x: left + (cornerRadius / 2.0), y: top))
+        path.addLine(to: CGPoint(x: left + (cornerRadius / 2.0) + cornerLength, y: top))
+
+        path.move(to: CGPoint(x: left, y: top + (cornerRadius / 2.0)))
+        path.addLine(to: CGPoint(x: left, y: top + (cornerRadius / 2.0) + cornerLength))
+
+        path.move(to: CGPoint(x: right - cornerRadius / 2.0, y: top))
+        path.addArc(
+            center: CGPoint(x: (right - cornerRadius / 2.0), y: (top + cornerRadius / 2.0)),
+            radius: cornerRadius / 2.0,
+            startAngle: Angle(degrees: 270.0),
+            endAngle: Angle(degrees: 360.0),
+            clockwise: false
+        )
+
+        path.move(to: CGPoint(x: right - (cornerRadius / 2.0), y: top))
+        path.addLine(to: CGPoint(x: right - (cornerRadius / 2.0) - cornerLength, y: top))
+
+        path.move(to: CGPoint(x: right, y: top + (cornerRadius / 2.0)))
+        path.addLine(to: CGPoint(x: right, y: top + (cornerRadius / 2.0) + cornerLength))
+
+        path.move(to: CGPoint(x: left + cornerRadius / 2.0, y: bottom))
+        path.addArc(
+            center: CGPoint(x: (left + cornerRadius / 2.0), y: (bottom - cornerRadius / 2.0)),
+            radius: cornerRadius / 2.0,
+            startAngle: Angle(degrees: 90.0),
+            endAngle: Angle(degrees: 180.0),
+            clockwise: false
+        )
+        
+        path.move(to: CGPoint(x: left + (cornerRadius / 2.0), y: bottom))
+        path.addLine(to: CGPoint(x: left + (cornerRadius / 2.0) + cornerLength, y: bottom))
+
+        path.move(to: CGPoint(x: left, y: bottom - (cornerRadius / 2.0)))
+        path.addLine(to: CGPoint(x: left, y: bottom - (cornerRadius / 2.0) - cornerLength))
+
+        path.move(to: CGPoint(x: right, y: bottom - cornerRadius / 2.0))
+        path.addArc(
+            center: CGPoint(x: (right - cornerRadius / 2.0), y: (bottom - cornerRadius / 2.0)),
+            radius: cornerRadius / 2.0,
+            startAngle: Angle(degrees: 0.0),
+            endAngle: Angle(degrees: 90.0),
+            clockwise: false
+        )
+        
+        path.move(to: CGPoint(x: right - (cornerRadius / 2.0), y: bottom))
+        path.addLine(to: CGPoint(x: right - (cornerRadius / 2.0) - cornerLength, y: bottom))
+
+        path.move(to: CGPoint(x: right, y: bottom - (cornerRadius / 2.0)))
+        path.addLine(to: CGPoint(x: right, y: bottom - (cornerRadius / 2.0) - cornerLength))
+
+        return path
+    }
+}
+
+struct SpeechView: View {
+    var body: some View {
+        Group {
+            SwiftSpeech.Demos.Basic(localeIdentifier: "ko_KR")
+            SwiftSpeech.Demos.Colors()
+            SwiftSpeech.Demos.List(localeIdentifier: "ko_KR")
+        }
+        .onAppear {
+            SwiftSpeech.requestSpeechRecognitionAuthorization()
         }
     }
 }
