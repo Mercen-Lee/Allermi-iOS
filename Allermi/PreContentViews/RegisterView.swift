@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Alamofire
+import CryptoKit
 
 struct RegisterView: View {
     var body: some View {
@@ -35,28 +37,46 @@ struct RegisterView: View {
 
 struct IDView: View {
     @FocusState private var isFocused: Bool
+    @State private var nextView = false
+    @State var duplicateIDwarning = false
+    @State var duplicateID = 0
     @State var registerId: String = ""
     var body: some View {
         VStack(alignment: .leading) {
             Text("닉네임을 생성해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
-            VStack {
+            VStack(alignment: .leading) {
                 TextField("닉네임", text: $registerId)
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused)
                 Rectangle()
                     .fill(isFocused ? .accentColor : Color(.systemGray3))
                     .frame(height: 1.3)
+                HStack(spacing: 0) {
+                    Text("16자리 이하의 ")
+                        .foregroundColor(registerId.count != 0 && registerId.count <= 16 ? .accentColor : Color(.systemGray3))
+                    Text("숫자나 문자")
+                        .foregroundColor(registerId.count != 0 ? .accentColor : Color(.systemGray3))
+                }
+                .isHidden(duplicateID != 0 && duplicateIDwarning, remove: true)
+                Text("이미 존재하는 닉네임입니다")
+                    .isHidden(duplicateID == 0 || !duplicateIDwarning, remove: true)
+                    .foregroundColor(.accentColor)
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
-            HStack(spacing: 0) {
-                Text("16자리 이하의 ")
-                    .foregroundColor(registerId.count != 0 && registerId.count <= 16 ? .accentColor : Color(.systemGray3))
-                Text("숫자나 문자")
-                    .foregroundColor(registerId.count != 0 ? .accentColor : Color(.systemGray3))
-            }
+            .modifier(ShakeEffect(animatableData: CGFloat(duplicateID)))
             Spacer()
-            NavigationLink(destination: PWView()) {
+            Button(action: {
+                AF.request("\(api)/user/\(registerId)/check", method: .get, encoding: URLEncoding.default).responseData { response in
+                    if String(data: response.data!, encoding: .utf8)! == "true" {
+                        withAnimation(.default) {
+                            self.duplicateIDwarning = true
+                            self.duplicateID += 1
+                        }
+                    }
+                    else { nextView.toggle() }
+                }
+            }) {
                 Text("다음")
                     .font(.system(size: 20, weight: .bold, design: .default))
                     .frame(maxWidth: .infinity)
@@ -66,6 +86,7 @@ struct IDView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 24))
             }
             .disabled(registerId.count == 0 || registerId.count > 16)
+            NavigationLink(destination: PWView(), isActive: $nextView) { EmptyView() }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")

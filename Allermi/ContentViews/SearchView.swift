@@ -96,7 +96,7 @@ struct SearchView: View {
                 let details = result.string
                 AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
                     text = JSON(response.data!)["C005"]["row"][0]["PRDLST_NM"].string ?? ""
-                    search.toggle()
+                    if(!text.isEmpty) { search.toggle() }
                 }
             case .failure(let error):
                 print("Scanning failed: \(error.localizedDescription)")

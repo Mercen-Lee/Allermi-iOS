@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+public let api = "http://43.200.182.132"
+
 @main
 struct AllermiApp: App {
     public let token = UserDefaults.standard.string(forKey: "token")
