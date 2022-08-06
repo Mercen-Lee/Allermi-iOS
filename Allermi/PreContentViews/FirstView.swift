@@ -58,15 +58,6 @@ struct FirstView: View {
                             .foregroundColor(Color(.systemBackground))
                             .clipShape(RoundedRectangle(cornerRadius: 24))
                     }
-                    NavigationLink(destination: DEVELOPERS()) {
-                        Text("DEVELOPERS")
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 60)
-                            .background(Color.gray)
-                            .foregroundColor(Color(.systemBackground))
-                            .clipShape(RoundedRectangle(cornerRadius: 24))
-                    }
                     Button(action: { showVer = true }) {
                         Text("INFORMATION")
                             .font(.system(size: 20, weight: .bold, design: .default))
