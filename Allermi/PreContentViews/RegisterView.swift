@@ -9,6 +9,68 @@ import SwiftUI
 import Alamofire
 import CryptoKit
 
+public struct MultilineHStack: View {
+    struct SizePreferenceKey: PreferenceKey {
+        typealias Value = [CGSize]
+        static var defaultValue: Value = []
+        static func reduce(value: inout Value, nextValue: () -> Value) {
+            value.append(contentsOf: nextValue())
+        }
+    }
+
+    private let items: [AnyView]
+    @State private var sizes: [CGSize] = []
+
+    public init<Data: RandomAccessCollection,  Content: View>(_ data: Data, @ViewBuilder content: (Data.Element) -> Content) {
+          self.items = data.map { AnyView(content($0)) }
+    }
+
+    public var body: some View {
+        GeometryReader {geometry in
+            ZStack(alignment: .topLeading) {
+                ForEach(0..<self.items.count) { index in
+                    self.items[index].background(self.backgroundView()).offset(self.getOffset(at: index, geometry: geometry))
+                }
+            }
+        }.onPreferenceChange(SizePreferenceKey.self) {
+                self.sizes = $0
+        }
+    }
+
+    private func getOffset(at index: Int, geometry: GeometryProxy) -> CGSize {
+        guard index < sizes.endIndex else {return .zero}
+        let frame = sizes[index]
+        var (x,y,maxHeight) = sizes[..<index].reduce((CGFloat.zero,CGFloat.zero,CGFloat.zero)) {
+            var (x,y,maxHeight) = $0
+            x += $1.width
+            if x > geometry.size.width {
+                x = $1.width
+                y += maxHeight
+                maxHeight = 0
+            }
+            maxHeight = max(maxHeight, $1.height)
+            return (x,y,maxHeight)
+        }
+        if x + frame.width > geometry.size.width {
+            x = 0
+            y += maxHeight
+        }
+        return .init(width: x, height: y)
+    }
+
+    private func backgroundView() -> some View {
+        GeometryReader { geometry in
+            Rectangle()
+                .fill(Color.clear)
+                .preference(
+                    key: SizePreferenceKey.self,
+                    value: [geometry.frame(in: CoordinateSpace.global).size]
+                )
+        }
+    }
+}
+
+
 struct RegisterView: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -144,17 +206,47 @@ struct AllergyView: View {
     @FocusState private var isFocused: Bool
     @State var allergySearch: String = ""
     @State var allergyList = [Int]()
+    @State var allergyLists = ["난류": ["달걀", "계란", "메추리알"],
+                               "육류": ["소고기", "쇠고기", "돼지고기"],
+                               "닭고기": [],
+                               "생선류": ["고등어", "연어", "전어", "멸치", "명태", "참치", "삼치", "꽁치", "생선"],
+                               "갑각류": ["새우", "게", "가재"],
+                               "연체동물류": ["오징어", "조개", "가리비", "홍합", "굴"],
+                               "유류": ["우유", "양유"],
+                               "견과류": ["땅콩", "호두", "잣", "마카다미아", "헤이즐넛", "캐슈넛", "아몬드", "피스타치오"],
+                               "대두": ["콩"],
+                               "꽃가루-식품": ["복숭아", "사과", "자두", "키위"],
+                               "토마토": [],
+                               "밀": [],
+                               "메밀": [],
+                               "아황산류": []]
     var body: some View {
         VStack(alignment: .leading) {
             Text("알레르기를 선택해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
-            VStack {
-                TextField("검색", text: $allergySearch)
-                    .font(.system(size: 25, weight: .medium, design: .default))
-                    .focused($isFocused)
-                Rectangle()
-                    .fill(isFocused ? .accentColor : Color(.systemGray3))
-                    .frame(height: 1.3)
+            VStack(alignment: .leading) {
+//                TextField("검색", text: $allergySearch)
+//                    .font(.system(size: 25, weight: .medium, design: .default))
+//                    .focused($isFocused)
+//                Rectangle()
+//                    .fill(isFocused ? .accentColor : Color(.systemGray3))
+//                    .frame(height: 1.3)
+                MultilineHStack(Array(allergyLists.keys)) { idx in
+                    Button(action: {
+                        print(idx)
+                    }) {
+                        Text(idx)
+                            .padding(.leading, 10)
+                            .padding(.trailing, 10)
+                            .foregroundColor(Color(.systemGray3))
+                            .frame(height: 30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color(.systemGray3), lineWidth: 1)
+                            )
+                    }
+                    .padding(5)
+                }
             }
             .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
             Spacer()
