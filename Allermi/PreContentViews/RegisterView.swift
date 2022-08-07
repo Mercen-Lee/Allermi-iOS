@@ -28,7 +28,7 @@ public struct MultilineHStack: View {
     public var body: some View {
         GeometryReader {geometry in
             ZStack(alignment: .topLeading) {
-                ForEach(0..<self.items.count) { index in
+                ForEach(0..<self.items.count, id: \.self) { index in
                     self.items[index].background(self.backgroundView()).offset(self.getOffset(at: index, geometry: geometry))
                 }
             }
@@ -220,6 +220,7 @@ struct AllergyView: View {
                                "밀": [],
                                "메밀": [],
                                "아황산류": []]
+    @State var viewLists = [String]()
     var body: some View {
         VStack(alignment: .leading) {
             Text("알레르기를 선택해주세요.")
@@ -231,7 +232,7 @@ struct AllergyView: View {
 //                Rectangle()
 //                    .fill(isFocused ? .accentColor : Color(.systemGray3))
 //                    .frame(height: 1.3)
-                MultilineHStack(Array(allergyLists.keys)) { idx in
+                MultilineHStack(viewLists) { idx in
                     Button(action: {
                         print(idx)
                     }) {
@@ -248,7 +249,7 @@ struct AllergyView: View {
                     .padding(5)
                 }
             }
-            .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
             Spacer()
             NavigationLink(destination: EndView()) {
                 Text("다음")
@@ -264,6 +265,14 @@ struct AllergyView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
         .padding(20)
+        .onAppear {
+            for idx in allergyLists {
+                viewLists.append(idx.key)
+                for idx2 in idx.value {
+                    viewLists.append(idx2)
+                }
+            }
+        }
     }
 }
 
