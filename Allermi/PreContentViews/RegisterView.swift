@@ -139,13 +139,7 @@ struct IDView: View {
                     else { nextView.toggle() }
                 }
             }) {
-                Text("다음")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color(.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
             .disabled(registerId.count == 0 || registerId.count > 16)
             NavigationLink(destination: PWView(), isActive: $nextView) { EmptyView() }
@@ -171,7 +165,7 @@ struct PWView: View {
                     .fill(isFocused ? .accentColor : Color(.systemGray3))
                     .frame(height: 1.3)
             }
-            .padding(EdgeInsets(top: 25, leading: 0, bottom: 0, trailing: 0))
+            .padding(.top, 25)
             HStack(spacing: 0) {
                 Text("8자리 이상의 ")
                     .foregroundColor(registerPw.count >= 8 ? .accentColor : Color(.systemGray3))
@@ -186,13 +180,7 @@ struct PWView: View {
             }
             Spacer()
             NavigationLink(destination: AllergyView()) {
-                Text("다음")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color(.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
             .disabled(registerPw.count < 8 || registerPw.filter("0123456789.".contains).isEmpty || Int(registerPw) != nil)
         }
@@ -220,18 +208,20 @@ struct AllergyView: View {
                                "밀": [],
                                "메밀": [],
                                "아황산류": []]
+    @State var activeLists = [String]()
     @State var viewLists = [String]()
+    func chooseString(arg: String) {
+        for i in Array(allergyLists.keys) {
+            if(allergyLists[i]!.contains(arg) || i == arg) {
+                
+            }
+        }
+    }
     var body: some View {
         VStack(alignment: .leading) {
             Text("알레르기를 선택해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
             VStack(alignment: .leading) {
-//                TextField("검색", text: $allergySearch)
-//                    .font(.system(size: 25, weight: .medium, design: .default))
-//                    .focused($isFocused)
-//                Rectangle()
-//                    .fill(isFocused ? .accentColor : Color(.systemGray3))
-//                    .frame(height: 1.3)
                 MultilineHStack(viewLists) { idx in
                     Button(action: {
                         print(idx)
@@ -249,16 +239,10 @@ struct AllergyView: View {
                     .padding(5)
                 }
             }
-            .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+            .padding(.top, 10)
             Spacer()
             NavigationLink(destination: EndView()) {
-                Text("다음")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color(.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
             .disabled(allergyList.isEmpty)
         }
@@ -266,11 +250,9 @@ struct AllergyView: View {
         .navigationBarTitle("")
         .padding(20)
         .onAppear {
-            for idx in allergyLists {
-                viewLists.append(idx.key)
-                for idx2 in idx.value {
-                    viewLists.append(idx2)
-                }
+            for i in Array(allergyLists.keys) {
+                viewLists.append(i)
+                viewLists += allergyLists[i]!
             }
         }
     }
@@ -283,17 +265,11 @@ struct EndView: View {
                 .font(.system(size: 30, weight: .bold, design: .default))
             Text("환영합니다!\n시작하기 버튼을 눌러 시작하세요.")
                 .font(.system(size: 20, weight: .medium, design: .default))
-                .padding(EdgeInsets(top: 1, leading: 0, bottom: 0, trailing: 0))
+                .padding(.top, 1)
                 .foregroundColor(.gray)
             Spacer()
             NavigationLink(destination: ContentView()) {
-                Text("시작하기")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color(.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                allermiButton(buttonTitle: "시작하기", buttonColor: Color.accentColor)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

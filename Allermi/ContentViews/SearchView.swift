@@ -49,7 +49,7 @@ struct SearchView: View {
                 .multilineTextAlignment(.center)
                 .background(RoundedRectangle(cornerRadius: 24)
                     .strokeBorder(Color.gray, lineWidth: 1)
-                    .background(colorScheme == .dark ? Color.gray.opacity(0.3) : Color.gray.opacity(0.1)))
+                    .background(.regularMaterial))
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 15, trailing: 20))
                 .onSubmit{ search.toggle() }
@@ -95,7 +95,7 @@ struct SearchView: View {
             case .success(let result):
                 let details = result.string
                 AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
-                    text = JSON(response.data!)["C005"]["row"][0]["PRDLST_NM"].string ?? ""
+                    text = JSON(response.data!)["C005"]["row"][0]["PRDLST_REPORT_NO"].string ?? ""
                     if(!text.isEmpty) { search.toggle() }
                 }
             case .failure(let error):

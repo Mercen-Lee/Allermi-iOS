@@ -14,6 +14,7 @@ struct CommunityView: View {
                 Text("Nickname")
             }
         }
+        .navigationTitle("소통")
         .refreshable { }
     }
 }

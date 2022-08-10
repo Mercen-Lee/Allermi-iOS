@@ -66,13 +66,7 @@ struct LoginView: View {
                     self.invalidPw += 1
                 }
             }}) {
-                Text("로그인")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 60)
-                    .background(Color.accentColor)
-                    .foregroundColor(Color(.systemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                allermiButton(buttonTitle: "로그인", buttonColor: Color.accentColor)
             }
             .disabled(loginId.isEmpty || loginPw.isEmpty)
         }

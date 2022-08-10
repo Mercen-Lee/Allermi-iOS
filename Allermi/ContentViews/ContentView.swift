@@ -23,10 +23,9 @@ struct ColorManager {
 }
 
 struct ContentView: View {
-    @Environment(\.colorScheme) var colorScheme
     @State var selectedIndex = 2
     let icons = ["house.fill", "bubble.left.and.bubble.right.fill", "magnifyingglass", "heart.text.square.fill", "person.fill"]
-    let names = ["홈", "커뮤니티", "", "상태", "프로필"]
+    let names = ["홈", "소통", "", "상태", "프로필"]
     var body: some View {
         ZStack {
             ZStack {
@@ -35,40 +34,39 @@ struct ContentView: View {
                     case 0: HomeView()
                     case 1: CommunityView()
                     case 2: SearchView()
+                        .padding(.bottom, scs/5)
                     case 3: HealthView()
                     default: ProfileView()
                 }
             }
-            .padding(.bottom, scs < 800 ? scs/10 : scs/11.3)
-            
             VStack(spacing: 0) {
-                
+                Spacer()
                 Rectangle()
                     .fill(.gray)
                     .frame(height: 1)
                 
                 HStack {
-                    ForEach(0..<5, id: \.self) { number in
+                    ForEach(0..<5, id: \.self) { idx in
                         Spacer()
-                        Button(action: { self.selectedIndex = number }, label: {
-                            if number == 2 { Image(systemName: icons[number])
+                        Button(action: { self.selectedIndex = idx }, label: {
+                            if idx == 2 { Image(systemName: icons[idx])
                                     .font(
                                         .system(size: scs/25, weight: .regular, design: .default))
                                     .foregroundColor(
                                         Color(.systemBackground))
                                     .frame(width: scs/12, height: scs/12)
                                     .background(
-                                        selectedIndex == number ? Color.accentColor : .gray)
+                                        selectedIndex == idx ? Color.accentColor : .gray)
                                     .cornerRadius(scs/10)
                             }
                             else {
                                 VStack {
-                                    Image(systemName: icons[number])
-                                        .font(.system(size: number == 0 ? scs/25 : number == 1 ? scs/30 : scs/23, weight: .regular, design: .default))
+                                    Image(systemName: icons[idx])
+                                        .font(.system(size: idx == 0 ? scs/25 : idx == 1 ? scs/30 : scs/23, weight: .regular, design: .default))
                                     .frame(width: scs/25, height: scs/25)
-                                    .foregroundColor(selectedIndex == number ? .accentColor : .gray)
-                                    Text(names[number])
-                                        .foregroundColor(selectedIndex == number ? .accentColor : .gray).font(.system(size: 10, weight: .bold, design: .default))
+                                    .foregroundColor(selectedIndex == idx ? .accentColor : .gray)
+                                    Text(names[idx])
+                                        .foregroundColor(selectedIndex == idx ? .accentColor : .gray).font(.system(size: 10, weight: .bold, design: .default))
                                 }
                             }
                         })
@@ -78,16 +76,15 @@ struct ContentView: View {
                 .padding(EdgeInsets(
                     top: scs < 800 ? 5 : 10,
                     leading: scs/100,
-                    bottom: scs < 800 ? 30 : 30,
+                    bottom: scs < 800 ? 5 : 30,
                     trailing: scs/100))
-                
-                .background(colorScheme == .dark ?
-                            Color.gray.opacity(0.3) : Color.gray.opacity(0.1))
+                .background(.regularMaterial)
             }
-            .offset(x: 0, y: scs < 800 ? scs/2.2 : scs/2.33)
+            .ignoresSafeArea()
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(false)
+        .navigationTitle("")
     }
 }
 

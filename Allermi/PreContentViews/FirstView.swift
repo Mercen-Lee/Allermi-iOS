@@ -7,9 +7,24 @@
 
 import SwiftUI
 
+struct allermiButton: View {
+    let buttonTitle: String
+    let buttonColor: Color
+    var body: some View {
+        Text(buttonTitle)
+            .font(.title3)
+            .fontWeight(.bold)
+            .frame(maxWidth: .infinity)
+            .frame(height: 60)
+            .background(buttonColor)
+            .foregroundColor(Color(.systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+    }
+}
+
 struct FirstView: View {
     @State var devMenu = false
-    @State var showVer = false
+    @State var showVersion = false
     var body: some View {
         NavigationView {
             VStack {
@@ -17,7 +32,9 @@ struct FirstView: View {
                 Image("Logo")
                     .resizable()
                     .scaledToFit()
-                    .padding(EdgeInsets(top: 0, leading: 40, bottom: 45, trailing: 40))
+                    .padding(.leading, 40)
+                    .padding(.bottom, 45)
+                    .padding(.trailing, 40)
                     .onLongPressGesture(minimumDuration: 0.5) {
                         devMenu.toggle()
                     }
@@ -25,50 +42,26 @@ struct FirstView: View {
                 Text("이미 계정이 있다면")
                     .foregroundColor(ColorManager.LightColor)
                 NavigationLink(destination: LoginView()) {
-                    Text("로그인")
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 60)
-                        .background(ColorManager.LightColor)
-                        .foregroundColor(Color(.systemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                    allermiButton(buttonTitle: "로그인", buttonColor: Color("LightColor"))
                 }
                 Text("처음 설치하셨다면")
                     .foregroundColor(.accentColor)
-                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                    .padding(.top, 10)
                 NavigationLink(destination: RegisterView()) {
-                    Text("회원가입")
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 60)
-                        .background(Color.accentColor)
-                        .foregroundColor(Color(.systemBackground))
-                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                    allermiButton(buttonTitle: "회원가입", buttonColor: Color.accentColor)
                 }
                 VStack {
                     Text("DEVELOPER MENU")
                         .foregroundColor(.gray)
-                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
+                        .padding(.top, 10)
                     NavigationLink(destination: ContentView()) {
-                        Text("SEARCH SHORTCUT")
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 60)
-                            .background(Color.gray)
-                            .foregroundColor(Color(.systemBackground))
-                            .clipShape(RoundedRectangle(cornerRadius: 24))
+                        allermiButton(buttonTitle: "SEARCH SHORTCUT", buttonColor: Color.gray)
                     }
-                    Button(action: { showVer = true }) {
-                        Text("INFORMATION")
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 60)
-                            .background(Color.gray)
-                            .foregroundColor(Color(.systemBackground))
-                            .clipShape(RoundedRectangle(cornerRadius: 24))
+                    Button(action: { showVersion = true }) {
+                        allermiButton(buttonTitle: "INFORMATION", buttonColor: Color.gray)
                     }
-                    .alert("Allermi Developer Beta v0.1", isPresented: $showVer) {
-                        Button("OK", role: .cancel) { showVer = false }
+                    .alert("Allermi Developer Beta v0.2", isPresented: $showVersion) {
+                        Button("OK", role: .cancel) { showVersion = false }
                     }
                 }
                 .isHidden(!devMenu, remove: true)
