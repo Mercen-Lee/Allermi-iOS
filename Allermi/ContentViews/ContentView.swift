@@ -22,6 +22,9 @@ struct ContentView: View {
     @State var selectedIndex = 2
     let icons = ["house.fill", "bubble.left.and.bubble.right.fill", "magnifyingglass", "heart.text.square.fill", "person.fill"]
     let names = ["홈", "소통", "", "상태", "프로필"]
+    init() {
+        UITableView.appearance().backgroundColor = .systemBackground
+    }
     var body: some View {
         ZStack {
             ZStack {
@@ -37,10 +40,7 @@ struct ContentView: View {
             }
             VStack(spacing: 0) {
                 Spacer()
-                Rectangle()
-                    .fill(.gray)
-                    .frame(height: 1)
-                
+                Divider()
                 HStack {
                     ForEach(0..<5, id: \.self) { idx in
                         Spacer()
@@ -79,7 +79,6 @@ struct ContentView: View {
             .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarHidden(false)
         .navigationTitle("")
     }
 }

@@ -105,10 +105,10 @@ struct IDView: View {
     @State var registerId: String = ""
     var body: some View {
         VStack(alignment: .leading) {
-            Text("닉네임을 생성해주세요.")
+            Text("아이디를 생성해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
             VStack(alignment: .leading) {
-                TextField("닉네임", text: $registerId)
+                TextField("아이디", text: $registerId)
                     .font(.system(size: 25, weight: .medium, design: .default))
                     .focused($isFocused)
                 Rectangle()

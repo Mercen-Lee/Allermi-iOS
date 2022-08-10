@@ -40,16 +40,14 @@ struct SearchView: View {
     let titles = ["링크로 검색", "위치로 검색", "바코드 검색", "음성 검색"]
     var body: some View {
         VStack {
-            Image("Logo")
+            Image("Logo2")
                 .resizable()
                 .scaledToFit()
                 .padding(EdgeInsets(top: 0, leading: 70, bottom: 45, trailing: 70))
             SuperTextField(placeholder: Text("식품명 또는 식당 상호명을 입력하세요"), text: $text)
                 .frame(height: 60)
                 .multilineTextAlignment(.center)
-                .background(RoundedRectangle(cornerRadius: 24)
-                    .strokeBorder(Color.gray, lineWidth: 1)
-                    .background(.regularMaterial))
+                .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 15, trailing: 20))
                 .onSubmit{ search.toggle() }

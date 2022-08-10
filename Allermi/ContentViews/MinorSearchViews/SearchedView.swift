@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchedView: View {
-    @Environment(\.colorScheme) var colorScheme
     @State var text: String
     var body: some View {
         List {
@@ -30,15 +29,11 @@ struct SearchedView: View {
                 }
                 .padding(.leading, 5)
             }
-            .listRowBackground(colorScheme == .dark ? Color(.gray).opacity(0.3) : Color(.gray).opacity(0.1))
+            .listRowBackground(Color("GrayColor"))
         }
         .listStyle(PlainListStyle())
         .navigationTitle(text)
-        .onAppear {
-            UITableView.appearance().backgroundColor = .systemBackground
-        }
         .refreshable {
-            
         }
     }
 }
