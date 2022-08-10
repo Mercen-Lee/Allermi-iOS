@@ -71,7 +71,7 @@ struct SearchView: View {
                                 .foregroundColor(Color(UIColor.systemBackground))
                         }
                             .frame(width: 55, height: 55)
-                            .background(ColorManager.LightColor)
+                            .background(Color("LightColor"))
                             .clipShape(Circle())
                         Text(titles[number-1])
                             .font(.system(size: 14, weight: .bold, design: .default))

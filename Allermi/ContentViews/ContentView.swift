@@ -18,10 +18,6 @@ extension View {
     }
 }
 
-struct ColorManager {
-    static let LightColor = Color("LightColor")
-}
-
 struct ContentView: View {
     @State var selectedIndex = 2
     let icons = ["house.fill", "bubble.left.and.bubble.right.fill", "magnifyingglass", "heart.text.square.fill", "person.fill"]

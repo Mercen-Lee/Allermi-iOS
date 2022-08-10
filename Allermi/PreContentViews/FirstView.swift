@@ -40,7 +40,7 @@ struct FirstView: View {
                     }
                 Spacer()
                 Text("이미 계정이 있다면")
-                    .foregroundColor(ColorManager.LightColor)
+                    .foregroundColor(Color("LightColor"))
                 NavigationLink(destination: LoginView()) {
                     allermiButton(buttonTitle: "로그인", buttonColor: Color("LightColor"))
                 }
