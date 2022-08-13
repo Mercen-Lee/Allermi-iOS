@@ -57,6 +57,25 @@ struct DevelopersView: View {
     }
 }
 
+struct SearchOption: View {
+    let icon: String
+    let title: String
+    var body: some View {
+        HStack {
+            Image(systemName: icon)
+                .font(.title2)
+            Spacer()
+            Text(title)
+        }
+        .padding(20)
+        .foregroundColor(Color(UIColor.systemBackground))
+        .frame(height: 40)
+        .frame(width: 130)
+        .background(Color.accentColor)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .padding([.leading, .trailing], 3)
+    }
+}
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
@@ -64,20 +83,20 @@ struct SearchView: View {
     @State var barcodeSearch = false
     @State var voiceSearch = false
     @State var developers = false
-    let icons = ["link", "location.fill", "barcode", "mic.fill"]
-    let titles = ["링크 검색", "위치 탐색", "바코드", "음성 인식"]
     var body: some View {
         VStack {
             Image("Logo2")
                 .resizable()
                 .scaledToFit()
-                .padding(EdgeInsets(top: 0, leading: 70, bottom: 45, trailing: 70))
-            SuperTextField(placeholder: Text("식품명 또는 식당 상호명을 입력하세요"), text: $text)
+                .frame(width: 270)
+                .padding(.bottom, 50)
+            SuperTextField(placeholder: Text("식품명을 입력해 검색하세요"), text: $text)
                 .frame(height: 60)
                 .multilineTextAlignment(.center)
                 .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
-                .padding(EdgeInsets(top: 0, leading: 20, bottom: 15, trailing: 20))
+                .padding([.leading, .trailing], 20)
+                .padding(.bottom, 15)
                 .onSubmit{
                     if text.uppercased() == "DEVELOPERS" {
                         developers.toggle()
@@ -87,31 +106,18 @@ struct SearchView: View {
                 }
             NavigationLink(destination: SearchedView(text: text), isActive: $search) { EmptyView() }
             HStack {
-                ForEach(1..<5, id: \.self) { idx in
-                    if idx != 1 { Spacer() }
-                    VStack {
-                        Button(action: {
-                            switch idx {
-                                case 1: print("a")
-                                case 2: LocationSearchView()
-                            case 3: barcodeSearch.toggle()
-                            default: voiceSearch.toggle()
-                            }
-                        }) {
-                            Image(systemName: icons[idx-1])
-                                .font(.system(size: 27))
-                                .foregroundColor(Color(UIColor.systemBackground))
-                        }
-                            .frame(width: 55, height: 55)
-                            .background(Color("LightColor"))
-                            .clipShape(Circle())
-                        Text(titles[idx-1])
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                    }.frame(width: 80)
+                Button(action: {
+                    barcodeSearch.toggle()
+                }) {
+                    SearchOption(icon: "location.fill", title: "위치")
+                }
+                
+                Button(action: {
+                    barcodeSearch.toggle()
+                }) {
+                    SearchOption(icon: "barcode", title: "바코드")
                 }
             }
-            .padding([.leading, .trailing], 15)
         }
         .sheet(isPresented: $barcodeSearch) {
             CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801037018332", completion: handleScan)

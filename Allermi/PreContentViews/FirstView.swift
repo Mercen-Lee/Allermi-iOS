@@ -32,9 +32,7 @@ struct FirstView: View {
                 Image("Logo")
                     .resizable()
                     .scaledToFit()
-                    .padding(.leading, 40)
-                    .padding(.bottom, 45)
-                    .padding(.trailing, 40)
+                    .frame(width: 270)
                     .onLongPressGesture(minimumDuration: 0.5) {
                         devMenu.toggle()
                     }

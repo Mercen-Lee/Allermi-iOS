@@ -53,7 +53,7 @@ struct LoginView: View {
             Spacer()
             NavigationLink(destination: ContentView(), isActive: $success) { EmptyView() }
             Button(action: {
-                AF.request("\(api)/sign/login", method: .post, parameters: ["email": loginId, "password": loginPw], encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+                AF.request("\(api)/sign/login", method: .post, parameters: ["userid": loginId, "password": loginPw], encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
                         .responseData { response in
                         if (response.response?.statusCode)! == 200 || (response.response?.statusCode)! == 201 {
                             UserDefaults.standard.set(JSON(response.data!)["data"]["token"].string, forKey: "token")

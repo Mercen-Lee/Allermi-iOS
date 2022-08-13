@@ -89,8 +89,13 @@ struct CommunityView: View {
     }
 }
 
+struct CommunityWriteView: View {
+    var body: some View {
+        Text("a")
+    }
+}
 struct CommunityView_Previews: PreviewProvider {
     static var previews: some View {
-        CommunityView()//.preferredColorScheme(.dark)
+        CommunityWriteView()//.preferredColorScheme(.dark)
     }
 }
