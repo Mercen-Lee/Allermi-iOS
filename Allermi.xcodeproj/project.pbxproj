@@ -165,7 +165,6 @@
 				93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */,
 				936655C4287B9EE400277FC6 /* AllermiApp.swift */,
 				939F7E52287FC7BE0016175A /* PreContentViews */,
-				93D5739D289CC53C002A7D5B /* Alamofires */,
 				939F7E51287FC7800016175A /* ContentViews */,
 				936655C8287B9EE500277FC6 /* Assets.xcassets */,
 				936655CA287B9EE500277FC6 /* Preview Content */,
@@ -229,13 +228,6 @@
 				93D71DB62885324B00F9DA52 /* SearchedView.swift */,
 			);
 			path = MinorSearchViews;
-			sourceTree = "<group>";
-		};
-		93D5739D289CC53C002A7D5B /* Alamofires */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Alamofires;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -10,6 +10,7 @@ import CodeScanner
 import SwiftSpeech
 import Alamofire
 import SwiftyJSON
+import AVKit
 
 struct SuperTextField: View {
     var placeholder: Text
@@ -30,12 +31,39 @@ struct SuperTextField: View {
     }
 }
 
+struct DevelopersView: View {
+    var player = AVPlayer()
+    var body: some View {
+        ZStack {
+            VideoPlayer(player: player)
+            VStack {
+                Capsule()
+                        .fill(.white)
+                        .frame(width: 50, height: 4)
+                        .padding(10)
+                Spacer()
+            }
+        }
+        .ignoresSafeArea()
+        .onAppear {
+            if player.currentItem == nil {
+                let item = AVPlayerItem(url: URL(string: "http://drive.google.com/uc?export=view&id=1_M4aysgitgG7aNj13pK66Vm9CIk9MeDf")!)
+                player.replaceCurrentItem(with: item)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                player.play()
+            })
+        }
+    }
+}
+
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
     @State var search = false
     @State var barcodeSearch = false
     @State var voiceSearch = false
+    @State var developers = false
     let icons = ["link", "location.fill", "barcode", "mic.fill"]
     let titles = ["링크 검색", "위치 탐색", "바코드", "음성 인식"]
     var body: some View {
@@ -50,7 +78,13 @@ struct SearchView: View {
                 .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 15, trailing: 20))
-                .onSubmit{ search.toggle() }
+                .onSubmit{
+                    if text.uppercased() == "DEVELOPERS" {
+                        developers.toggle()
+                    } else {
+                        search.toggle()
+                    }
+                }
             NavigationLink(destination: SearchedView(text: text), isActive: $search) { EmptyView() }
             HStack {
                 ForEach(1..<5, id: \.self) { idx in
@@ -86,6 +120,9 @@ struct SearchView: View {
         }
         .sheet(isPresented: $voiceSearch) {
             SpeechView()
+        }
+        .sheet(isPresented: $developers) {
+            DevelopersView()
         }
     }
     func handleScan(result: Result<ScanResult, ScanError>) {

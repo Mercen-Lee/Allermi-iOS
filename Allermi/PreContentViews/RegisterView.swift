@@ -129,7 +129,8 @@ struct IDView: View {
             .modifier(ShakeEffect(animatableData: CGFloat(duplicateID)))
             Spacer()
             Button(action: {
-                AF.request("\(api)/user/\(registerId)/check", method: .get, encoding: URLEncoding.default).responseData { response in
+                AF.request("\(api)/user/\(registerId)/check", method: .get, encoding: URLEncoding.default)
+                    .responseData { response in
                     if String(data: response.data!, encoding: .utf8)! == "true" {
                         withAnimation(.default) {
                             self.duplicateIDwarning = true
