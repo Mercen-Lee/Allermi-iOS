@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CodeScanner
-import SwiftSpeech
 import Alamofire
 import SwiftyJSON
 import AVKit
@@ -81,7 +80,6 @@ struct SearchView: View {
     @State var text: String = ""
     @State var search = false
     @State var barcodeSearch = false
-    @State var voiceSearch = false
     @State var developers = false
     var body: some View {
         VStack {
@@ -123,9 +121,6 @@ struct SearchView: View {
             CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801037018332", completion: handleScan)
                 .overlay(ScanOverlayView())
                 .ignoresSafeArea()
-        }
-        .sheet(isPresented: $voiceSearch) {
-            SpeechView()
         }
         .sheet(isPresented: $developers) {
             DevelopersView()
@@ -266,19 +261,6 @@ struct ScanOverlayView: View {
         path.addLine(to: CGPoint(x: right, y: bottom - (cornerRadius / 2.0) - cornerLength))
 
         return path
-    }
-}
-
-struct SpeechView: View {
-    var body: some View {
-        Group {
-            SwiftSpeech.Demos.Basic(localeIdentifier: "ko_KR")
-            SwiftSpeech.Demos.Colors()
-            SwiftSpeech.Demos.List(localeIdentifier: "ko_KR")
-        }
-        .onAppear {
-            SwiftSpeech.requestSpeechRecognitionAuthorization()
-        }
     }
 }
 

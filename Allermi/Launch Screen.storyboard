@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="SimpleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bU5-Oz-zm6">
-                                <rect key="frame" x="120" y="54" width="150" height="736"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="bU5-Oz-zm6">
+                                <rect key="frame" x="60" y="222" width="270" height="400"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="9qj-21-Elb"/>
+                                    <constraint firstAttribute="width" constant="270" id="9qj-21-Elb"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -37,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SimpleLogo" width="605" height="736"/>
+        <image name="Logo" width="1000" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

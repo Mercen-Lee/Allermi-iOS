@@ -24,7 +24,6 @@
 		936655F3287BA29500277FC6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F2287BA29500277FC6 /* HomeView.swift */; };
 		936655F5287BA2B000277FC6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F4287BA2B000277FC6 /* ProfileView.swift */; };
 		936655F7287BA2BA00277FC6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936655F6287BA2BA00277FC6 /* CommunityView.swift */; };
-		93AB8D68289B908E00412732 /* SwiftSpeech in Frameworks */ = {isa = PBXBuildFile; productRef = 93AB8D67289B908E00412732 /* SwiftSpeech */; };
 		93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D08F85287FC43300DF9E9F /* ContentView.swift */; };
 		93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */; };
 		93D71DB72885324B00F9DA52 /* SearchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D71DB62885324B00F9DA52 /* SearchedView.swift */; };
@@ -89,7 +88,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				93EC3BC4289ABF6E003A8CCF /* CodeScanner in Frameworks */,
-				93AB8D68289B908E00412732 /* SwiftSpeech in Frameworks */,
 				7656E74EF567AE7CD7E1522D /* Pods_Allermi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +248,6 @@
 			name = Allermi;
 			packageProductDependencies = (
 				93EC3BC3289ABF6E003A8CCF /* CodeScanner */,
-				93AB8D67289B908E00412732 /* SwiftSpeech */,
 			);
 			productName = Allermi;
 			productReference = 936655C1287B9EE400277FC6 /* 알레르미.app */;
@@ -329,7 +326,6 @@
 			mainGroup = 936655B8287B9EE400277FC6;
 			packageReferences = (
 				93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */,
-				93AB8D66289B908E00412732 /* XCRemoteSwiftPackageReference "SwiftSpeech" */,
 			);
 			productRefGroup = 936655C2287B9EE400277FC6 /* Products */;
 			projectDirPath = "";
@@ -829,14 +825,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		93AB8D66289B908E00412732 /* XCRemoteSwiftPackageReference "SwiftSpeech" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Cay-Zhang/SwiftSpeech";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -848,11 +836,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		93AB8D67289B908E00412732 /* SwiftSpeech */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 93AB8D66289B908E00412732 /* XCRemoteSwiftPackageReference "SwiftSpeech" */;
-			productName = SwiftSpeech;
-		};
 		93EC3BC3289ABF6E003A8CCF /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */;
