@@ -117,6 +117,7 @@ struct SearchView: View {
                 }
             }
         }
+        .navigationTitle("")
         .sheet(isPresented: $barcodeSearch) {
             CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801037018332", completion: handleScan)
                 .overlay(ScanOverlayView())

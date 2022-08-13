@@ -34,7 +34,7 @@ struct ContentView: View {
                         case 0: HomeView()
                         case 1: CommunityView()
                         case 2: SearchView()
-                            .padding(.bottom, scs/5)
+                            .padding(.bottom, scs < 800 ? scs/5 : scs/5.5)
                         case 3: HealthView()
                         default: ProfileView()
                     }
@@ -46,15 +46,22 @@ struct ContentView: View {
                         ForEach(0..<5, id: \.self) { idx in
                             Spacer()
                             Button(action: { self.selectedIndex = idx }, label: {
-                                if idx == 2 { Image(systemName: icons[idx])
-                                        .font(
-                                            .system(size: scs/25, weight: .regular, design: .default))
-                                        .foregroundColor(
-                                            Color(.systemBackground))
+                                if idx == 2 {
+//                                    Image(systemName: icons[idx])
+//                                        .font(
+//                                            .system(size: scs/25, weight: .regular, design: .default))
+//                                        .foregroundColor(
+//                                            Color(.systemBackground))
+//                                        .frame(width: scs/12, height: scs/12)
+//                                        .background(
+//                                            selectedIndex == idx ? Color.accentColor : .gray)
+//                                        .cornerRadius(scs/10)
+                                    Image("SearchButton")
+                                        .resizable()
+                                        .antialiased(true)
+                                        .renderingMode(.template)
+                                        .foregroundColor(selectedIndex == idx ? Color.accentColor : .gray)
                                         .frame(width: scs/12, height: scs/12)
-                                        .background(
-                                            selectedIndex == idx ? Color.accentColor : .gray)
-                                        .cornerRadius(scs/10)
                                 }
                                 else {
                                     VStack {

@@ -131,6 +131,7 @@ struct IDView: View {
             Button(action: {
                 AF.request("\(api)/user/\(registerId)/check", method: .get, encoding: URLEncoding.default)
                     .responseData { response in
+                        print(String(decoding: response.data!, as: UTF8.self))
                     if String(data: response.data!, encoding: .utf8)! == "true" {
                         withAnimation(.default) {
                             self.duplicateIDwarning = true
