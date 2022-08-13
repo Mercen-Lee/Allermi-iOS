@@ -195,7 +195,6 @@ struct PWView: View {
 struct AllergyView: View {
     @FocusState private var isFocused: Bool
     @State var allergySearch: String = ""
-    @State var allergyList = [Int]()
     @State var allergyLists = ["난류": ["달걀", "계란", "메추리알"],
                                "육류": ["소고기", "쇠고기", "돼지고기"],
                                "닭고기": [],
@@ -211,38 +210,57 @@ struct AllergyView: View {
                                "메밀": [],
                                "아황산류": []]
     @State var selectedAllergy = [String]()
+    @State var relatedAllergy = [String]()
     @State var viewLists = [String]()
-    func chooseString(arg: String) {
+    func chooseString(_ arg: String) -> [String] {
+        var result = [String]()
         for i in Array(allergyLists.keys) {
             if(allergyLists[i]!.contains(arg) || i == arg) {
-                
+                result = allergyLists[i]!
+                result.append(i)
             }
         }
+        return result.filter(){$0 != arg}
+    }
+    func chooseMajor(_ arg: String) -> String {
+        var result = String()
+        for i in Array(allergyLists.keys) {
+            if(allergyLists[i]!.contains(arg) || i == arg) {
+                result = i
+            }
+        }
+        return result
     }
     var body: some View {
         VStack(alignment: .leading) {
             Text("알레르기를 선택해주세요.")
                 .font(.system(size: 30, weight: .bold, design: .default))
-            VStack(alignment: .leading) {
-                MultilineHStack(viewLists) { idx in
-                    Button(action: {
-                        if selectedAllergy.contains(idx) {
-                            selectedAllergy = selectedAllergy.filter(){$0 != idx}
-                        } else {
-                            selectedAllergy.append(idx)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    MultilineHStack(viewLists) { idx in
+                        Button(action: {
+                            if selectedAllergy.contains(chooseMajor(idx)) {
+                                selectedAllergy = selectedAllergy.filter(){$0 != chooseMajor(idx)}
+                                for i in chooseString(chooseMajor(idx)) {
+                                    relatedAllergy = relatedAllergy.filter(){$0 != i}
+                                }
+                            } else {
+                                selectedAllergy.append(chooseMajor(idx))
+                                relatedAllergy += chooseString(chooseMajor(idx))
+                            }
+                        }) {
+                            Text(idx)
+                                .padding(.leading, 10)
+                                .padding(.trailing, 10)
+                                .foregroundColor(selectedAllergy.contains(idx) ? .accentColor : relatedAllergy.contains(idx) ? Color("LightColor") : Color(.systemGray3))
+                                .frame(height: 30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(selectedAllergy.contains(idx) ? .accentColor : relatedAllergy.contains(idx) ? Color("LightColor") : Color(.systemGray3), lineWidth: 1)
+                                )
                         }
-                    }) {
-                        Text(idx)
-                            .padding(.leading, 10)
-                            .padding(.trailing, 10)
-                            .foregroundColor(selectedAllergy.contains(idx) ? .accentColor : Color(.systemGray3))
-                            .frame(height: 30)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(selectedAllergy.contains(idx) ? .accentColor : Color(.systemGray3), lineWidth: 1)
-                            )
+                        .padding(5)
                     }
-                    .padding(5)
                 }
             }
             .padding(.top, 10)
@@ -250,7 +268,7 @@ struct AllergyView: View {
             NavigationLink(destination: EndView()) {
                 allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
-            .disabled(allergyList.isEmpty)
+            .disabled(selectedAllergy.isEmpty)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
