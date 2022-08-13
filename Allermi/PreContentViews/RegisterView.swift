@@ -210,7 +210,7 @@ struct AllergyView: View {
                                "밀": [],
                                "메밀": [],
                                "아황산류": []]
-    @State var activeLists = [String]()
+    @State var selectedAllergy = [String]()
     @State var viewLists = [String]()
     func chooseString(arg: String) {
         for i in Array(allergyLists.keys) {
@@ -226,16 +226,20 @@ struct AllergyView: View {
             VStack(alignment: .leading) {
                 MultilineHStack(viewLists) { idx in
                     Button(action: {
-                        print(idx)
+                        if selectedAllergy.contains(idx) {
+                            selectedAllergy = selectedAllergy.filter(){$0 != idx}
+                        } else {
+                            selectedAllergy.append(idx)
+                        }
                     }) {
                         Text(idx)
                             .padding(.leading, 10)
                             .padding(.trailing, 10)
-                            .foregroundColor(Color(.systemGray3))
+                            .foregroundColor(selectedAllergy.contains(idx) ? .accentColor : Color(.systemGray3))
                             .frame(height: 30)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color(.systemGray3), lineWidth: 1)
+                                    .stroke(selectedAllergy.contains(idx) ? .accentColor : Color(.systemGray3), lineWidth: 1)
                             )
                     }
                     .padding(5)

@@ -82,7 +82,7 @@ struct CommunityView: View {
         .navigationBarItems(trailing: Button(action: {
             
         }) {
-            Image(systemName: "plus")
+            Image(systemName: "square.and.pencil")
                 .foregroundColor(.accentColor)
         })
         .refreshable { }

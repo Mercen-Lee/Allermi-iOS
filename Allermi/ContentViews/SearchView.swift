@@ -67,7 +67,7 @@ struct SearchOption: View {
             Text(title)
         }
         .padding(20)
-        .foregroundColor(Color(UIColor.systemBackground))
+        .foregroundColor(Color(.systemBackground))
         .frame(height: 40)
         .frame(width: 130)
         .background(Color.accentColor)
@@ -99,27 +99,26 @@ struct SearchView: View {
                     if text.uppercased() == "DEVELOPERS" {
                         developers.toggle()
                     } else {
-                        search.toggle()
+                        if !text.isEmpty {
+                            search.toggle()
+                        }
                     }
                 }
             NavigationLink(destination: SearchedView(text: text), isActive: $search) { EmptyView() }
             HStack {
-                Button(action: {
-                    barcodeSearch.toggle()
-                }) {
+                Button(action: { barcodeSearch.toggle() }) {
                     SearchOption(icon: "location.fill", title: "위치")
                 }
-                
-                Button(action: {
-                    barcodeSearch.toggle()
-                }) {
+                Button(action: { barcodeSearch.toggle() }) {
                     SearchOption(icon: "barcode", title: "바코드")
                 }
             }
         }
         .navigationTitle("")
         .sheet(isPresented: $barcodeSearch) {
-            CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801037018332", completion: handleScan)
+            CodeScannerView(codeTypes: [.ean13, .ean8, .upce],
+                            simulatedData: "8801037018332",
+                            completion: handleScan)
                 .overlay(ScanOverlayView())
                 .ignoresSafeArea()
         }
@@ -134,7 +133,7 @@ struct SearchView: View {
                 let details = result.string
                 AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
                     text = JSON(response.data!)["C005"]["row"][0]["PRDLST_REPORT_NO"].string ?? ""
-                    if(!text.isEmpty) { search.toggle() }
+                    if !text.isEmpty { search.toggle() }
                 }
             case .failure(let error):
                 print("Scanning failed: \(error.localizedDescription)")

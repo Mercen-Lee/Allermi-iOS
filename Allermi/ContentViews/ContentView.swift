@@ -47,15 +47,6 @@ struct ContentView: View {
                             Spacer()
                             Button(action: { self.selectedIndex = idx }, label: {
                                 if idx == 2 {
-//                                    Image(systemName: icons[idx])
-//                                        .font(
-//                                            .system(size: scs/25, weight: .regular, design: .default))
-//                                        .foregroundColor(
-//                                            Color(.systemBackground))
-//                                        .frame(width: scs/12, height: scs/12)
-//                                        .background(
-//                                            selectedIndex == idx ? Color.accentColor : .gray)
-//                                        .cornerRadius(scs/10)
                                     Image("SearchButton")
                                         .resizable()
                                         .antialiased(true)
