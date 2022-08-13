@@ -33,6 +33,7 @@ struct HomeView: View {
     @State var homeList = [homeItems]()
     @State var extendedView = false
     @State var selectedURL = String()
+    @State var pickerSelection = 0
     func replacer(_ str: String) -> String {
         var result = str
         for i in ["</b>", "<b>", "&apos;", "&quot;"] {
@@ -41,7 +42,7 @@ struct HomeView: View {
         return result
     }
     func load(_ start: Int) {
-        AF.request("https://openapi.naver.com/v1/search/news.json?query=%EC%95%8C%EB%A0%88%EB%A5%B4%EA%B8%B0&sort=sim&display=100&start=\(start)", method: .get, encoding: URLEncoding.default, headers: ["X-Naver-Client-Id": "yQdhR2jeN0fZpRDFbSwM", "X-Naver-Client-Secret": "9d_lsGNnaD"]).responseData {
+        AF.request("https://openapi.naver.com/v1/search/news.json?query=%EC%95%8C%EB%A0%88%EB%A5%B4%EA%B8%B0&sort=\(pickerSelection == 0 ? "sim" : "date")&display=100&start=\(start)", method: .get, encoding: URLEncoding.default, headers: ["X-Naver-Client-Id": "yQdhR2jeN0fZpRDFbSwM", "X-Naver-Client-Secret": "9d_lsGNnaD"]).responseData {
             guard let value = $0.value else { return }
             guard let result = try? decoder.decode(homeDatas.self, from: value) else { return }
             var fres = result.items
@@ -157,8 +158,8 @@ struct HomeView: View {
                 .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
                 .listRowInsets(EdgeInsets())
                 .buttonStyle(PlainButtonStyle())
+                .padding(.bottom, homeList.count == idx + 1 ? 100 : 20)
             }
-            .padding(.bottom, 10)
         }
         .overlay(Group {
             if homeList.isEmpty {
@@ -177,6 +178,20 @@ struct HomeView: View {
             load(1)
         }
         .navigationTitle("홈")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Picker(selection: $pickerSelection, label: Text("Sorting options")) {
+                        Text("연관도순").tag(0)
+                        Text("최신순").tag(1)
+                    }
+                    .onChange(of: pickerSelection) { tag in load(1) }
+                }
+                label: {
+                    Label("Sort", systemImage: pickerSelection == 0 ? "list.dash" : "calendar")
+                }
+            }
+        }
     }
 }
 
