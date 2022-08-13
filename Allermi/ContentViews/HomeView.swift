@@ -16,7 +16,7 @@ public struct homeDatas: Decodable {
     let display: Int
     let start: Int
     let total: Int
-    let items: [homeItems]
+    var items: [homeItems]
 }
 
 public struct homeItems: Decodable {
@@ -44,7 +44,66 @@ struct HomeView: View {
         AF.request("https://openapi.naver.com/v1/search/news.json?query=%EC%95%8C%EB%A0%88%EB%A5%B4%EA%B8%B0&sort=sim&display=100&start=\(start)", method: .get, encoding: URLEncoding.default, headers: ["X-Naver-Client-Id": "yQdhR2jeN0fZpRDFbSwM", "X-Naver-Client-Secret": "9d_lsGNnaD"]).responseData {
             guard let value = $0.value else { return }
             guard let result = try? decoder.decode(homeDatas.self, from: value) else { return }
-            self.homeList = result.items
+            var fres = result.items
+            for i in 0..<fres.count {
+                if fres.count <= i { break }
+                for j in i+1..<fres.count {
+                    if fres.count <= j { break }
+                    if cluster(fres[i].title, fres[j].title) > 10000 {
+                        print(j)
+                        fres.remove(at: j)
+                    }
+                }
+            }
+            self.homeList = fres
+        }
+    }
+    func timeParse(_ original: String) -> String {
+        let x = original.components(separatedBy: " ")
+        return "\(x[3])년 \(["Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12][x[2]]!)월 \(x[1])일 \(["Mon,": "월", "Tue,": "화", "Wed,": "수", "Thu,": "목", "Fri,": "금", "Sat,": "토", "Sun,": "일"][x[0]]!)요일"
+    }
+    func cluster(_ str1: String, _ str2: String) -> Int {
+        let str1Arr = Array(str1)
+        let str2Arr = Array(str2)
+        
+        var str1arr: [String] = []
+        var str2arr: [String] = []
+
+        for i in 0..<str1Arr.count - 1 {
+            if str1Arr[i].isLetter && str1Arr[i+1].isLetter{
+                str1arr.append("\(str1Arr[i].uppercased())\(str1Arr[i+1].uppercased())")
+            }
+        }
+
+        for i in 0..<str2Arr.count - 1 {
+            if str2Arr[i].isLetter && str2Arr[i+1].isLetter{
+                str2arr.append("\(str2Arr[i].uppercased())\(str2Arr[i+1].uppercased())")
+            }
+        }
+        
+        var allCnt =  str1arr.count + str2arr.count
+        var myCnt = 0
+
+        for i in str1arr.indices{
+            for j in str2arr.indices{
+                if str1arr[i] == str2arr[j]{
+                    myCnt += 1
+                    str2arr.remove(at: j)
+                    break
+                }
+            }
+        }
+
+        allCnt -= myCnt
+        
+        if allCnt == 0{
+            return 65536
+        }
+        else if myCnt == 0{
+            return 0
+        }
+        else{
+            return Int(Double(myCnt) / Double(allCnt) * 65536)
         }
     }
     var body: some View {
@@ -73,7 +132,7 @@ struct HomeView: View {
                                         } placeholder: {
                                             Image(systemName: "newspaper.fill")
                                                 .resizable()
-                                                .foregroundColor(Color("LightColor"))
+                                                .foregroundColor(Color(.label))
                                                 .padding(2)
                                                 .frame(width: 30, height: 30)
                                     }
@@ -82,15 +141,15 @@ struct HomeView: View {
                                     .font(.caption)
                                 HStack {
                                     Spacer()
-                                    Text(homeList[idx].pubDate)
+                                    Text(timeParse(homeList[idx].pubDate))
                                         .font(.caption2)
                                         .opacity(0.5)
                                 }
                             }
                             Spacer()
                         }
-                        .padding([.top, .bottom], 10)
-                        .padding([.leading, .trailing], 20)
+                        .padding([.top, .bottom, .trailing], 10)
+                        .padding(.leading, 20)
                     }
                 }
                 .listRowSeparator(.hidden)
@@ -101,6 +160,12 @@ struct HomeView: View {
             }
             .padding(.bottom, 10)
         }
+        .overlay(Group {
+            if homeList.isEmpty {
+                ProgressView()
+                    .padding(.bottom, scs/5)
+            }
+        })
         .sheet(isPresented: $extendedView) {
             ExtendedHomeView(path: self.selectedURL)
         }

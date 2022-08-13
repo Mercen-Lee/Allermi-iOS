@@ -37,7 +37,7 @@ struct SearchView: View {
     @State var barcodeSearch = false
     @State var voiceSearch = false
     let icons = ["link", "location.fill", "barcode", "mic.fill"]
-    let titles = ["링크로 검색", "위치로 검색", "바코드 검색", "음성 검색"]
+    let titles = ["링크 검색", "위치 탐색", "바코드", "음성 인식"]
     var body: some View {
         VStack {
             Image("Logo2")
@@ -53,30 +53,31 @@ struct SearchView: View {
                 .onSubmit{ search.toggle() }
             NavigationLink(destination: SearchedView(text: text), isActive: $search) { EmptyView() }
             HStack {
-                ForEach(1..<5, id: \.self) { number in
-                    if number != 1 { Spacer() }
+                ForEach(1..<5, id: \.self) { idx in
+                    if idx != 1 { Spacer() }
                     VStack {
                         Button(action: {
-                            switch number {
+                            switch idx {
                                 case 1: print("a")
                                 case 2: LocationSearchView()
                             case 3: barcodeSearch.toggle()
                             default: voiceSearch.toggle()
                             }
                         }) {
-                            Image(systemName: icons[number-1])
+                            Image(systemName: icons[idx-1])
                                 .font(.system(size: 27))
                                 .foregroundColor(Color(UIColor.systemBackground))
                         }
                             .frame(width: 55, height: 55)
                             .background(Color("LightColor"))
                             .clipShape(Circle())
-                        Text(titles[number-1])
-                            .font(.system(size: 14, weight: .bold, design: .default))
+                        Text(titles[idx-1])
+                            .font(.footnote)
                             .foregroundColor(.gray)
                     }.frame(width: 80)
                 }
-            }.padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+            }
+            .padding([.leading, .trailing], 15)
         }
         .sheet(isPresented: $barcodeSearch) {
             CodeScannerView(codeTypes: [.ean13, .ean8, .upce], simulatedData: "8801037018332", completion: handleScan)
