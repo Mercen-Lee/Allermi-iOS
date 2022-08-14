@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Alamofire
-import CryptoKit
+import SwiftyJSON
 
 public struct MultilineHStack: View {
     struct SizePreferenceKey: PreferenceKey {
@@ -129,9 +129,8 @@ struct IDView: View {
             .modifier(ShakeEffect(animatableData: CGFloat(duplicateID)))
             Spacer()
             Button(action: {
-                AF.request("\(api)/user/\(registerId)/check", method: .get, encoding: URLEncoding.default)
+                AF.request("\(api)/user/\(registerId)", method: .get, encoding: URLEncoding.default)
                     .responseData { response in
-                        print(String(decoding: response.data!, as: UTF8.self))
                     if String(data: response.data!, encoding: .utf8)! == "true" {
                         withAnimation(.default) {
                             self.duplicateIDwarning = true
@@ -144,7 +143,7 @@ struct IDView: View {
                 allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
             .disabled(registerId.count == 0 || registerId.count > 16)
-            NavigationLink(destination: PWView(), isActive: $nextView) { EmptyView() }
+            NavigationLink(destination: PWView(registerId: registerId), isActive: $nextView) { EmptyView() }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
@@ -154,6 +153,7 @@ struct IDView: View {
 
 struct PWView: View {
     @FocusState private var isFocused: Bool
+    @State var registerId: String
     @State var registerPw: String = ""
     var body: some View {
         VStack(alignment: .leading) {
@@ -181,7 +181,7 @@ struct PWView: View {
                     .foregroundColor(!registerPw.isEmpty && !registerPw.filter("0123456789.".contains).isEmpty && Int(registerPw) == nil ? .accentColor : Color(.systemGray3))
             }
             Spacer()
-            NavigationLink(destination: AllergyView()) {
+            NavigationLink(destination: AllergyView(registerId: registerId, registerPw: registerPw)) {
                 allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
             .disabled(registerPw.count < 8 || registerPw.filter("0123456789.".contains).isEmpty || Int(registerPw) != nil)
@@ -194,6 +194,9 @@ struct PWView: View {
 
 struct AllergyView: View {
     @FocusState private var isFocused: Bool
+    @State var completeRegister = false
+    @State var registerId: String
+    @State var registerPw: String
     @State var allergySearch: String = ""
     @State var allergyLists = ["난류": ["달걀", "계란", "메추리알"],
                                "육류": ["소고기", "쇠고기", "돼지고기"],
@@ -265,11 +268,35 @@ struct AllergyView: View {
             }
             .padding(.top, 10)
             Spacer()
-            NavigationLink(destination: EndView()) {
+            Button(action: {
+                AF.request("\(api)/sign/register", method: .post, parameters: ["userid": registerId, "password": registerPw, "allergy": selectedAllergy], encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+                        .responseData { response in
+                        if (response.response?.statusCode)! == 200 || (response.response?.statusCode)! == 201 {
+                            AF.request("\(api)/sign/login", method: .post, parameters: ["userid": registerId, "password": registerPw], encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+                                    .responseData { response in
+                                    if (response.response?.statusCode)! == 200 || (response.response?.statusCode)! == 201 {
+                                        UserDefaults.standard.set(JSON(response.data!)["data"]["token"].string, forKey: "token")
+                                        completeRegister.toggle()
+                                    } else {
+                                        //예외 처리
+                                    }
+                                }
+                        } else {
+                            //예외 처리
+                        }
+                    }
+            }) {
                 allermiButton(buttonTitle: "다음", buttonColor: Color.accentColor)
             }
             .disabled(selectedAllergy.isEmpty)
+            NavigationLink(destination: EndView(), isActive: $completeRegister) { EmptyView() }
         }
+        .navigationBarItems(trailing: Button(action: {
+            
+        }) {
+            Image(systemName: "info.circle")
+                .foregroundColor(.accentColor)
+        })
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle("")
         .padding(20)
@@ -305,6 +332,6 @@ struct EndView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        AllergyView()
+        EndView()
     }
 }
