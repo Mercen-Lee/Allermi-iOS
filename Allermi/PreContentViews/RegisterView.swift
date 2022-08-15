@@ -8,6 +8,7 @@
 import SwiftUI
 import Alamofire
 import SwiftyJSON
+import AVKit
 
 public struct MultilineHStack: View {
     struct SizePreferenceKey: PreferenceKey {
@@ -100,6 +101,7 @@ struct RegisterView: View {
 struct IDView: View {
     @FocusState private var isFocused: Bool
     @State private var nextView = false
+    @State var audioPlayer: AVAudioPlayer!
     @State var duplicateIDwarning = false
     @State var duplicateID = 0
     @State var registerId: String = ""
@@ -129,6 +131,11 @@ struct IDView: View {
             .modifier(ShakeEffect(animatableData: CGFloat(duplicateID)))
             Spacer()
             Button(action: {
+                if registerId.uppercased() == "ZELDA" || registerId.uppercased() == "LINK" {
+                    let sound = Bundle.main.path(forResource: "Secret", ofType: "mp3")
+                    self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                    self.audioPlayer.play()
+                }
                 AF.request("\(api)/user/\(registerId)", method: .get, encoding: URLEncoding.default)
                     .responseData { response in
                     if String(data: response.data!, encoding: .utf8)! == "true" {

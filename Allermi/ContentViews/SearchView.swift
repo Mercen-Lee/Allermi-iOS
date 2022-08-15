@@ -75,12 +75,26 @@ struct SearchOption: View {
         .padding([.leading, .trailing], 3)
     }
 }
+
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var text: String = ""
     @State var search = false
     @State var barcodeSearch = false
     @State var developers = false
+    func handleScan(result: Result<ScanResult, ScanError>) {
+        barcodeSearch = false
+        switch result {
+            case .success(let result):
+                let details = result.string
+                AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
+                    text = JSON(response.data!)["C005"]["row"][0]["PRDLST_REPORT_NO"].string ?? ""
+                    if !text.isEmpty { search.toggle() }
+                }
+            case .failure(let error):
+                print("Scanning failed: \(error.localizedDescription)")
+            }
+    }
     var body: some View {
         VStack {
             Image("Logo2")
@@ -104,7 +118,7 @@ struct SearchView: View {
                         }
                     }
                 }
-            NavigationLink(destination: SearchedView(text: text), isActive: $search) { EmptyView() }
+            NavigationLink(destination: SearchedView(searchKeyword: text), isActive: $search) { EmptyView() }
             HStack {
                 Button(action: { barcodeSearch.toggle() }) {
                     SearchOption(icon: "location.fill", title: "위치")
@@ -125,19 +139,6 @@ struct SearchView: View {
         .sheet(isPresented: $developers) {
             DevelopersView()
         }
-    }
-    func handleScan(result: Result<ScanResult, ScanError>) {
-        barcodeSearch = false
-        switch result {
-            case .success(let result):
-                let details = result.string
-                AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
-                    text = JSON(response.data!)["C005"]["row"][0]["PRDLST_REPORT_NO"].string ?? ""
-                    if !text.isEmpty { search.toggle() }
-                }
-            case .failure(let error):
-                print("Scanning failed: \(error.localizedDescription)")
-            }
     }
 }
 
