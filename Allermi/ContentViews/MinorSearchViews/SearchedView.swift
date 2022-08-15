@@ -54,7 +54,7 @@ struct SearchedView: View {
                             .fontWeight(.bold)
                             .lineLimit(1)
                             .multilineTextAlignment(.leading)
-                        Text(searchResult[idx].allergy)
+                        Text(searchResult[idx].allergy.isEmpty ? "알레르기 해당 없음" : searchResult[idx].allergy)
                     }
                     Spacer()
                 }
@@ -80,16 +80,28 @@ struct SearchedView: View {
 }
 
 struct SearchedDetailView: View {
+    @Binding var data: SearchedData
     var body: some View {
         VStack(alignment: .leading) {
-            Rectangle()
+            AsyncImage(url: URL(string: data.metaURL)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 200)
+            } placeholder: { ProgressView() }
                 .frame(maxWidth: .infinity)
                 .frame(height: 200)
-            VStack(alignment: .leading) {
-                Text("코코팜")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                Text("정제수, 탄산가스, 구연산, 난소화성말토덱스트린, 레몬농축과즙, 염화칼륨, 탄산수소나트륨, 젖산칼슘, 합성착향료, 합성감미료")
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .bottom, spacing: 3) {
+                    Text(data.name)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Text(data.type)
+                        .font(.subheadline)
+                }
+                Text(data.allergy)
+                Text(data.ingredient)
                     .font(.caption)
             }
             .padding(20)
@@ -99,8 +111,8 @@ struct SearchedDetailView: View {
     }
 }
 
-struct SearchedView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchedDetailView()
-    }
-}
+//struct SearchedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchedDetailView()
+//    }
+//}

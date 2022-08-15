@@ -78,66 +78,94 @@ struct SearchOption: View {
 
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State var searchResult = [SearchedData]()
+    @State var barcodeResult = SearchedData(allergy: String(),
+                                            company: String(),
+                                            imageURL: String(),
+                                            ingredient: String(),
+                                            metaURL: String(),
+                                            name: String(),
+                                            number: String(),
+                                            nutrient: String(),
+                                            type: String())
     @State var text: String = ""
+    @State var barcode: String = ""
     @State var search = false
     @State var barcodeSearch = false
     @State var developers = false
+    @State var detailView = false
     func handleScan(result: Result<ScanResult, ScanError>) {
         barcodeSearch = false
         switch result {
             case .success(let result):
                 let details = result.string
                 AF.request("http://openapi.foodsafetykorea.go.kr/api/90b5037cda5d44e7bc84/C005/json/1/5/BAR_CD=\(details)", method: .get, encoding: URLEncoding.default).responseData { response in
-                    text = JSON(response.data!)["C005"]["row"][0]["PRDLST_REPORT_NO"].string ?? ""
-                    if !text.isEmpty { search.toggle() }
+                    barcode = JSON(response.data!)["C005"]["row"][0]["PRDLST_REPORT_NO"].string ?? ""
+                    if !barcode.isEmpty {
+                        AF.request("\(api)/item/search/number", method: .get, parameters: ["keyword": barcode], encoding: URLEncoding.default, headers: ["Content-Type": "application/json"])
+                                .responseData { response in
+                                    print(String(decoding: response.data!, as: UTF8.self))
+                                    guard let value = response.value else { return }
+                                    guard let result = try? decoder.decode(SearchedData.self, from: value) else { return }
+                                    self.barcodeResult = result
+                                    detailView.toggle()
+                                }
+                    }
                 }
             case .failure(let error):
                 print("Scanning failed: \(error.localizedDescription)")
             }
     }
+    let decoder: JSONDecoder = JSONDecoder()
     var body: some View {
-        VStack {
-            Image("Logo2")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 270)
-                .padding(.bottom, 50)
-            SuperTextField(placeholder: Text("식품명을 입력해 검색하세요"), text: $text)
-                .frame(height: 60)
-                .multilineTextAlignment(.center)
-                .background(.regularMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 24))
-                .padding([.leading, .trailing], 20)
-                .padding(.bottom, 15)
-                .onSubmit{
-                    if text.uppercased() == "DEVELOPERS" {
-                        developers.toggle()
-                    } else {
-                        if !text.isEmpty {
-                            search.toggle()
+        NavigationView {
+            VStack {
+                Image("Logo2")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 270)
+                    .padding(.bottom, 50)
+                SuperTextField(placeholder: Text("식품명을 입력해 검색하세요"), text: $text)
+                    .frame(height: 60)
+                    .multilineTextAlignment(.center)
+                    .background(.regularMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .padding([.leading, .trailing], 20)
+                    .padding(.bottom, 15)
+                    .onSubmit{
+                        if text.uppercased() == "DEVELOPERS" {
+                            developers.toggle()
+                        } else {
+                            if !text.isEmpty {
+                                search.toggle()
+                            }
                         }
                     }
-                }
-            NavigationLink(destination: SearchedView(searchKeyword: text), isActive: $search) { EmptyView() }
-            HStack {
-                Button(action: { barcodeSearch.toggle() }) {
-                    SearchOption(icon: "location.fill", title: "위치")
-                }
-                Button(action: { barcodeSearch.toggle() }) {
-                    SearchOption(icon: "barcode", title: "바코드")
+                NavigationLink(destination: SearchedView(searchKeyword: text), isActive: $search) { EmptyView() }
+                HStack {
+                    Button(action: { barcodeSearch.toggle() }) {
+                        SearchOption(icon: "location.fill", title: "위치")
+                    }
+                    Button(action: { barcodeSearch.toggle() }) {
+                        SearchOption(icon: "barcode", title: "바코드")
+                    }
                 }
             }
-        }
-        .navigationTitle("")
-        .sheet(isPresented: $barcodeSearch) {
-            CodeScannerView(codeTypes: [.ean13, .ean8, .upce],
-                            simulatedData: "8801037018332",
-                            completion: handleScan)
-                .overlay(ScanOverlayView())
-                .ignoresSafeArea()
-        }
-        .sheet(isPresented: $developers) {
-            DevelopersView()
+            .navigationTitle("")
+            .sheet(isPresented: $barcodeSearch) {
+                CodeScannerView(codeTypes: [.ean13, .ean8, .upce],
+                                simulatedData: "8801037018332",
+                                completion: handleScan)
+                    .overlay(ScanOverlayView())
+                    .ignoresSafeArea()
+            }
+            .sheet(isPresented: $developers) {
+                DevelopersView()
+            }
+            .sheet(isPresented: $detailView) {
+                SearchedDetailView(data: $barcodeResult)
+            }
+            .navigationBarHidden(true)
         }
     }
 }

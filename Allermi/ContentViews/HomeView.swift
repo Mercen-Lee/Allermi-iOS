@@ -110,51 +110,50 @@ struct HomeView: View {
         NavigationView {
             List {
                 ForEach(0..<homeList.count, id: \.self) { idx in
-                    NavigationLink(destination: ExtendedHomeView(path: homeList[idx].originallink)) {
-                        VStack {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 5) {
-                                    HStack(alignment: .top) {
-                                        Text(replacer(homeList[idx].title))
-                                            .font(.title2)
-                                            .bold()
-                                            .fixedSize(horizontal: false, vertical: true)
-                                        Spacer()
-                                        AsyncImage(url: URL(string: "https://\(homeList[idx].originallink.components(separatedBy: "/")[2])/favicon.ico")) { image in
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fill)
-                                                    .frame(width: 30, height: 30)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                                    .clipped()
-                                            } placeholder: {
-                                                Image(systemName: "newspaper.fill")
-                                                    .resizable()
-                                                    .foregroundColor(Color(.label))
-                                                    .padding(2)
-                                                    .frame(width: 30, height: 30)
-                                        }
-                                    }
-                                    Text(replacer(homeList[idx].description))
-                                        .font(.caption)
-                                    HStack {
-                                        Spacer()
-                                        Text(timeParse(homeList[idx].pubDate))
-                                            .font(.caption2)
-                                            .opacity(0.5)
+                    VStack {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack(alignment: .top) {
+                                    Text(replacer(homeList[idx].title))
+                                        .font(.title2)
+                                        .bold()
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    Spacer()
+                                    AsyncImage(url: URL(string: "https://\(homeList[idx].originallink.components(separatedBy: "/")[2])/favicon.ico")) { image in
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 30, height: 30)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                .clipped()
+                                        } placeholder: {
+                                            Image(systemName: "newspaper.fill")
+                                                .resizable()
+                                                .foregroundColor(Color(.label))
+                                                .padding(2)
+                                                .frame(width: 30, height: 30)
                                     }
                                 }
-                                Spacer()
+                                Text(replacer(homeList[idx].description))
+                                    .font(.caption)
+                                HStack {
+                                    Spacer()
+                                    Text(timeParse(homeList[idx].pubDate))
+                                        .font(.caption2)
+                                        .opacity(0.5)
+                                }
                             }
-                            .padding([.top, .bottom, .trailing], 10)
-                            .padding(.leading, 20)
+                            Spacer()
                         }
+                        .padding([.top, .bottom, .trailing], 10)
+                        .padding(.leading, 20)
                     }
+                    .buttonStyle(PlainButtonStyle())
                     .listRowSeparator(.hidden)
                     .frame(maxWidth: .infinity)
                     .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
                     .listRowInsets(EdgeInsets())
-                    .buttonStyle(PlainButtonStyle())
+                    .background(NavigationLink("", destination: ExtendedHomeView(path: homeList[idx].originallink)).opacity(0))
                     .padding(.bottom, homeList.count == idx + 1 ? 100 : 20)
                 }
             }

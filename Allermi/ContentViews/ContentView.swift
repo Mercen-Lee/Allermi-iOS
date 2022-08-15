@@ -24,6 +24,8 @@ struct ContentView: View {
     let names = ["홈", "소통", "", "상태", "프로필"]
     init() {
         UITableView.appearance().backgroundColor = .systemBackground
+        UITableView.appearance().allowsSelection = false
+        UITableViewCell.appearance().selectionStyle = .none
     }
     var body: some View {
         ZStack {
