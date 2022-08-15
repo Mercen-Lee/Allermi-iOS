@@ -26,57 +26,55 @@ struct ContentView: View {
         UITableView.appearance().backgroundColor = .systemBackground
     }
     var body: some View {
-        NavigationView {
+        ZStack {
             ZStack {
-                ZStack {
-                    Spacer()
-                    switch selectedIndex {
-                        case 0: HomeView()
-                        case 1: CommunityView()
-                        case 2: SearchView()
-                            .padding(.bottom, scs < 800 ? scs/5 : scs/5.5)
-                        case 3: HealthView()
-                        default: ProfileView()
-                    }
+                Spacer()
+                switch selectedIndex {
+                    case 0: HomeView()
+                    case 1: CommunityView()
+                    case 2: SearchView()
+                        .padding(.bottom, scs < 800 ? scs/10 : scs/12)
+                    case 3: HealthView()
+                    default: ProfileView()
                 }
-                VStack(spacing: 0) {
-                    Spacer()
-                    Divider()
-                    HStack {
-                        ForEach(0..<5, id: \.self) { idx in
-                            Spacer()
-                            Button(action: { self.selectedIndex = idx }, label: {
-                                if idx == 2 {
-                                    Image("SearchButton")
-                                        .resizable()
-                                        .antialiased(true)
-                                        .renderingMode(.template)
-                                        .foregroundColor(selectedIndex == idx ? Color.accentColor : .gray)
-                                        .frame(width: scs/12, height: scs/12)
-                                }
-                                else {
-                                    VStack {
-                                        Image(systemName: icons[idx])
-                                            .font(.system(size: idx == 0 ? scs/25 : idx == 1 ? scs/30 : scs/23, weight: .regular, design: .default))
-                                        .frame(width: scs/25, height: scs/25)
-                                        .foregroundColor(selectedIndex == idx ? .accentColor : .gray)
-                                        Text(names[idx])
-                                            .foregroundColor(selectedIndex == idx ? .accentColor : .gray).font(.system(size: 10, weight: .bold, design: .default))
-                                    }
-                                }
-                            })
-                            Spacer()
-                        }
-                    }
-                    .padding(EdgeInsets(
-                        top: scs < 800 ? 5 : 10,
-                        leading: scs/100,
-                        bottom: scs < 800 ? 5 : 30,
-                        trailing: scs/100))
-                    .background(.regularMaterial)
-                }
-                .ignoresSafeArea()
             }
+            VStack(spacing: 0) {
+                Spacer()
+                Divider()
+                HStack {
+                    ForEach(0..<5, id: \.self) { idx in
+                        Spacer()
+                        Button(action: { self.selectedIndex = idx }, label: {
+                            if idx == 2 {
+                                Image("SearchButton")
+                                    .resizable()
+                                    .antialiased(true)
+                                    .renderingMode(.template)
+                                    .foregroundColor(selectedIndex == idx ? Color.accentColor : .gray)
+                                    .frame(width: scs/12, height: scs/12)
+                            }
+                            else {
+                                VStack {
+                                    Image(systemName: icons[idx])
+                                        .font(.system(size: idx == 0 ? scs/25 : idx == 1 ? scs/30 : scs/23, weight: .regular, design: .default))
+                                    .frame(width: scs/25, height: scs/25)
+                                    .foregroundColor(selectedIndex == idx ? .accentColor : .gray)
+                                    Text(names[idx])
+                                        .foregroundColor(selectedIndex == idx ? .accentColor : .gray).font(.system(size: 10, weight: .bold, design: .default))
+                                }
+                            }
+                        })
+                        Spacer()
+                    }
+                }
+                .padding(EdgeInsets(
+                    top: scs < 800 ? 5 : 10,
+                    leading: scs/100,
+                    bottom: scs < 800 ? 5 : 30,
+                    trailing: scs/100))
+                .background(.regularMaterial)
+            }
+            .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)

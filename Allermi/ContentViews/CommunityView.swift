@@ -25,67 +25,69 @@ let dummyData: [CommunityDatas] = [
 struct CommunityView: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        List {
-            ForEach(0..<dummyData.count, id: \.self) { idx in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(dummyData[idx].author)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        Spacer()
-                        Text("\(dummyData[idx].likes)")
-                        Button(action: {
-                            
-                        }) {
-                        Image(systemName: dummyData[idx].liked ? "heart.fill" : "heart")
-                            .foregroundColor(dummyData[idx].liked ? .accentColor : Color(.label))
-                            .font(.title2)
+        NavigationView {
+            List {
+                ForEach(0..<dummyData.count, id: \.self) { idx in
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(dummyData[idx].author)
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            Spacer()
+                            Text("\(dummyData[idx].likes)")
+                            Button(action: {
+                                
+                            }) {
+                            Image(systemName: dummyData[idx].liked ? "heart.fill" : "heart")
+                                .foregroundColor(dummyData[idx].liked ? .accentColor : Color(.label))
+                                .font(.title2)
+                            }
                         }
-                    }
-                    .padding([.leading, .trailing], 20)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .background(Color("InvertedGrayColor").opacity(colorScheme == .dark ? 0.05 : 0.1))
-                    Text(dummyData[idx].body)
-                        .fixedSize(horizontal: false, vertical: true)
                         .padding([.leading, .trailing], 20)
-                    VStack(alignment: .trailing) {
-                        AsyncImage(url: URL(string: dummyData[idx].image)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 200)
-                                .frame(maxWidth: .infinity)
-                                .clipShape(RoundedRectangle(cornerRadius: 7))
-                                .clipped()
-                        } placeholder: {
-                            ProgressView()
-                                .frame(height: 200)
-                                .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(Color("InvertedGrayColor").opacity(colorScheme == .dark ? 0.05 : 0.1))
+                        Text(dummyData[idx].body)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding([.leading, .trailing], 20)
+                        VStack(alignment: .trailing) {
+                            AsyncImage(url: URL(string: dummyData[idx].image)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(height: 200)
+                                    .frame(maxWidth: .infinity)
+                                    .clipShape(RoundedRectangle(cornerRadius: 7))
+                                    .clipped()
+                            } placeholder: {
+                                ProgressView()
+                                    .frame(height: 200)
+                                    .frame(maxWidth: .infinity)
+                            }
+                            Text(dummyData[idx].date)
+                                .font(.caption2)
+                                .opacity(0.5)
                         }
-                        Text(dummyData[idx].date)
-                            .font(.caption2)
-                            .opacity(0.5)
+                        .padding([.leading, .trailing, .bottom], 20)
                     }
-                    .padding([.leading, .trailing, .bottom], 20)
+                    .listRowSeparator(.hidden)
+                    .frame(maxWidth: .infinity)
+                    .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
+                    .listRowInsets(EdgeInsets())
+                    .padding(.bottom, dummyData.count == idx + 1 ? 100 : 20)
                 }
-                .listRowSeparator(.hidden)
-                .frame(maxWidth: .infinity)
-                .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
-                .listRowInsets(EdgeInsets())
-                .padding(.bottom, dummyData.count == idx + 1 ? 100 : 20)
             }
+            .buttonStyle(PlainButtonStyle())
+            .listStyle(PlainListStyle())
+            .navigationTitle("소통")
+            .navigationBarItems(trailing: Button(action: {
+                
+            }) {
+                Image(systemName: "square.and.pencil")
+                    .foregroundColor(.accentColor)
+            })
+            .refreshable { }
         }
-        .buttonStyle(PlainButtonStyle())
-        .listStyle(PlainListStyle())
-        .navigationTitle("소통")
-        .navigationBarItems(trailing: Button(action: {
-            
-        }) {
-            Image(systemName: "square.and.pencil")
-                .foregroundColor(.accentColor)
-        })
-        .refreshable { }
     }
 }
 

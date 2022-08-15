@@ -15,7 +15,7 @@ struct SearchedData: Decodable {
     let ingredient: String
     let metaURL: String
     let name: String
-    let number: Int
+    let number: String
     let nutrient: String
     let type: String
 }
@@ -25,7 +25,7 @@ struct SearchedView: View {
     @State var searchKeyword: String
     @State var searchResult = [SearchedData]()
     func load() {
-        AF.request("\(api)/item/search", method: .get, parameters: ["keyword": searchKeyword], encoding: URLEncoding.default, headers: ["Content-Type": "application/json", "ACCESS_TOKEN": UserDefaults.standard.string(forKey: "token")!])
+        AF.request("\(api)/item/search", method: .get, parameters: ["keyword": searchKeyword], encoding: URLEncoding.default, headers: ["Content-Type": "application/json"])
                 .responseData { response in
                     print(String(decoding: response.data!, as: UTF8.self))
                     guard let value = response.value else { return }
@@ -54,7 +54,7 @@ struct SearchedView: View {
                             .fontWeight(.bold)
                             .lineLimit(1)
                             .multilineTextAlignment(.leading)
-                        Text("알레르기 해당 없음")
+                        Text(searchResult[idx].allergy)
                     }
                     Spacer()
                 }
@@ -79,8 +79,28 @@ struct SearchedView: View {
     }
 }
 
+struct SearchedDetailView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Rectangle()
+                .frame(maxWidth: .infinity)
+                .frame(height: 200)
+            VStack(alignment: .leading) {
+                Text("코코팜")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Text("정제수, 탄산가스, 구연산, 난소화성말토덱스트린, 레몬농축과즙, 염화칼륨, 탄산수소나트륨, 젖산칼슘, 합성착향료, 합성감미료")
+                    .font(.caption)
+            }
+            .padding(20)
+            Spacer()
+        }
+        .ignoresSafeArea()
+    }
+}
+
 struct SearchedView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchedView(searchKeyword: "text")
+        SearchedDetailView()
     }
 }

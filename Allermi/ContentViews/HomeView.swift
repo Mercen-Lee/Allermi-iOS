@@ -29,10 +29,8 @@ public struct homeItems: Decodable {
 
 struct HomeView: View {
     @Environment(\.colorScheme) var colorScheme
-    let decoder: JSONDecoder = JSONDecoder()
-    @State var homeList = [homeItems]()
-    @State var extendedView = false
     @State var selectedURL = String()
+    @State var homeList = [homeItems]()
     @State var pickerSelection = 0
     func replacer(_ str: String) -> String {
         var result = str
@@ -59,6 +57,7 @@ struct HomeView: View {
             self.homeList = fres
         }
     }
+    let decoder: JSONDecoder = JSONDecoder()
     func timeParse(_ original: String) -> String {
         let x = original.components(separatedBy: " ")
         return "\(x[3])년 \(["Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12][x[2]]!)월 \(x[1])일 \(["Mon,": "월", "Tue,": "화", "Wed,": "수", "Thu,": "목", "Fri,": "금", "Sat,": "토", "Sun,": "일"][x[0]]!)요일"
@@ -108,87 +107,83 @@ struct HomeView: View {
         }
     }
     var body: some View {
-        List {
-            ForEach(0..<homeList.count, id: \.self) { idx in
-                Button(action: {
-                    selectedURL = homeList[idx].originallink
-                    extendedView = true
-                }) {
-                    VStack {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 5) {
-                                HStack(alignment: .top) {
-                                    Text(replacer(homeList[idx].title))
-                                        .font(.title2)
-                                        .bold()
-                                        .fixedSize(horizontal: false, vertical: true)
-                                    Spacer()
-                                    AsyncImage(url: URL(string: "https://\(homeList[idx].originallink.components(separatedBy: "/")[2])/favicon.ico")) { image in
-                                            image
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 30, height: 30)
-                                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                                .clipped()
-                                        } placeholder: {
-                                            Image(systemName: "newspaper.fill")
-                                                .resizable()
-                                                .foregroundColor(Color(.label))
-                                                .padding(2)
-                                                .frame(width: 30, height: 30)
+        NavigationView {
+            List {
+                ForEach(0..<homeList.count, id: \.self) { idx in
+                    NavigationLink(destination: ExtendedHomeView(path: homeList[idx].originallink)) {
+                        VStack {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 5) {
+                                    HStack(alignment: .top) {
+                                        Text(replacer(homeList[idx].title))
+                                            .font(.title2)
+                                            .bold()
+                                            .fixedSize(horizontal: false, vertical: true)
+                                        Spacer()
+                                        AsyncImage(url: URL(string: "https://\(homeList[idx].originallink.components(separatedBy: "/")[2])/favicon.ico")) { image in
+                                                image
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 30, height: 30)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                    .clipped()
+                                            } placeholder: {
+                                                Image(systemName: "newspaper.fill")
+                                                    .resizable()
+                                                    .foregroundColor(Color(.label))
+                                                    .padding(2)
+                                                    .frame(width: 30, height: 30)
+                                        }
+                                    }
+                                    Text(replacer(homeList[idx].description))
+                                        .font(.caption)
+                                    HStack {
+                                        Spacer()
+                                        Text(timeParse(homeList[idx].pubDate))
+                                            .font(.caption2)
+                                            .opacity(0.5)
                                     }
                                 }
-                                Text(replacer(homeList[idx].description))
-                                    .font(.caption)
-                                HStack {
-                                    Spacer()
-                                    Text(timeParse(homeList[idx].pubDate))
-                                        .font(.caption2)
-                                        .opacity(0.5)
-                                }
+                                Spacer()
                             }
-                            Spacer()
+                            .padding([.top, .bottom, .trailing], 10)
+                            .padding(.leading, 20)
                         }
-                        .padding([.top, .bottom, .trailing], 10)
-                        .padding(.leading, 20)
                     }
+                    .listRowSeparator(.hidden)
+                    .frame(maxWidth: .infinity)
+                    .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
+                    .listRowInsets(EdgeInsets())
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.bottom, homeList.count == idx + 1 ? 100 : 20)
                 }
-                .listRowSeparator(.hidden)
-                .frame(maxWidth: .infinity)
-                .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
-                .listRowInsets(EdgeInsets())
-                .buttonStyle(PlainButtonStyle())
-                .padding(.bottom, homeList.count == idx + 1 ? 100 : 20)
             }
-        }
-        .overlay(Group {
-            if homeList.isEmpty {
-                ProgressView()
-                    .padding(.bottom, scs/5)
+            .overlay(Group {
+                if homeList.isEmpty {
+                    ProgressView()
+                        .padding(.bottom, scs/5)
+                }
+            })
+            .listStyle(PlainListStyle())
+            .refreshable {
+                load(1)
             }
-        })
-        .sheet(isPresented: $extendedView) {
-            ExtendedHomeView(path: self.selectedURL)
-        }
-        .listStyle(PlainListStyle())
-        .refreshable {
-            load(1)
-        }
-        .onAppear {
-            load(1)
-        }
-        .navigationTitle("홈")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Menu {
-                    Picker(selection: $pickerSelection, label: Text("Sorting options")) {
-                        Text("연관도순").tag(0)
-                        Text("최신순").tag(1)
+            .onAppear {
+                load(1)
+            }
+            .navigationTitle("홈")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Picker(selection: $pickerSelection, label: Text("Sorting options")) {
+                            Text("연관도순").tag(0)
+                            Text("최신순").tag(1)
+                        }
+                        .onChange(of: pickerSelection) { tag in load(1) }
                     }
-                    .onChange(of: pickerSelection) { tag in load(1) }
-                }
-                label: {
-                    Label("Sort", systemImage: pickerSelection == 0 ? "list.dash" : "calendar")
+                    label: {
+                        Label("Sort", systemImage: pickerSelection == 0 ? "list.dash" : "calendar")
+                    }
                 }
             }
         }
@@ -199,10 +194,7 @@ struct ExtendedHomeView: UIViewRepresentable {
     @State var path: String
     func makeUIView(context: Context) -> WKWebView { WKWebView() }
     func updateUIView(_ uiView: WKWebView, context: Context) {
-
         guard let url = URL(string: path) else { return }
-
-        uiView.scrollView.isScrollEnabled = false
         uiView.load(.init(url: url))
     }
 }
