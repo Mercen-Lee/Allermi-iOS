@@ -65,6 +65,7 @@ struct SearchOption: View {
                 .font(.title2)
             Spacer()
             Text(title)
+                .bold()
         }
         .padding(20)
         .foregroundColor(Color(.systemBackground))

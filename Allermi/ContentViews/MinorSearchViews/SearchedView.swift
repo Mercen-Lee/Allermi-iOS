@@ -43,9 +43,10 @@ struct SearchedView: View {
                 }
     }
     func loadMyInfo() {
-        AF.request("\(api)/sign", method: .get, parameters: ["ACCESS_TOKEN": UserDefaults.standard.string(forKey: "token")!], encoding: URLEncoding.default, headers: ["Content-Type": "application/json"])
+        AF.request("\(api)/sign", method: .get, encoding: URLEncoding.default, headers: ["ACCESS_TOKEN": UserDefaults.standard.string(forKey: "token")!, "Content-Type": "application/json"])
                 .responseData { response in
-                    print(String(decoding: response.data!, as: UTF8.self))
+//                    print(UserDefaults.standard.string(forKey: "token")!)
+//                    print(String(decoding: response.data!, as: UTF8.self))
                     AF.request("\(api)/sign/user/\(String(data: response.data!, encoding: .utf8)!)", method: .get, parameters: ["ACCESS_TOKEN": UserDefaults.standard.string(forKey: "token")!], encoding: URLEncoding.default, headers: ["Content-Type": "application/json"])
                         .responseData { response in
                             print(String(decoding: response.data!, as: UTF8.self))
@@ -55,14 +56,12 @@ struct SearchedView: View {
                         }
                 }
     }
-    func checkDuplicated(_ arr: String) -> String {
-        var result = ""
-        print(userAllergy)
-        print(arr)
+    func checkDuplicated(_ arr: String) -> [String] {
+        var result = [String]()
         for i in userAllergy {
             for j in arr.components(separatedBy: ",") {
                 if i == j {
-                    result = result + ", " + i
+                    result.append(i)
                 }
             }
         }
@@ -89,7 +88,8 @@ struct SearchedView: View {
                             .fontWeight(.bold)
                             .lineLimit(1)
                             .multilineTextAlignment(.leading)
-                        Text(checkDuplicated(searchResult[idx].allergy).isEmpty ? "알레르기 해당 없음" : checkDuplicated(searchResult[idx].allergy))
+                        Text(checkDuplicated(searchResult[idx].allergy).isEmpty ? "알레르기 해당 없음" : "\(checkDuplicated(searchResult[idx].allergy).joined(separator: ", ")) 일치")
+                            .fontWeight(checkDuplicated(searchResult[idx].allergy).isEmpty ? .regular : .bold)
                     }
                     Spacer()
                 }
@@ -97,10 +97,10 @@ struct SearchedView: View {
                 .padding([.top, .bottom], 10)
                 .listRowSeparator(.hidden)
                 .frame(maxWidth: .infinity)
-                .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
+                .background(checkDuplicated(searchResult[idx].allergy).isEmpty ? Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9) : .accentColor.opacity(0.5))
                 .listRowInsets(EdgeInsets())
                 .buttonStyle(PlainButtonStyle())
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
             }
         }
         .listStyle(PlainListStyle())
