@@ -29,6 +29,7 @@ public struct homeItems: Decodable {
 
 struct HomeView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State var extendedView = false
     @State var selectedURL = String()
     @State var homeList = [homeItems]()
     @State var pickerSelection = 0
@@ -145,16 +146,22 @@ struct HomeView: View {
                             }
                             Spacer()
                         }
-                        .padding([.top, .bottom, .trailing], 10)
+                        .padding([.top, .trailing], 10)
+                        .padding(.bottom, 3)
                         .padding(.leading, 20)
+                        NavigationLink("", destination: ExtendedHomeView(path: homeList[idx].originallink), isActive: $extendedView)
+                            .frame(height: 0)
+                            .isHidden(true)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .listRowSeparator(.hidden)
                     .frame(maxWidth: .infinity)
                     .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
                     .listRowInsets(EdgeInsets())
-                    .background(NavigationLink("", destination: ExtendedHomeView(path: homeList[idx].originallink)).opacity(0))
-                    .padding(.bottom, homeList.count == idx + 1 ? 100 : 20)
+                    .onTapGesture {
+                        extendedView.toggle()
+                    }
+                    .padding(.bottom, homeList.count == idx + 1 ? 100 : 10)
                 }
             }
             .overlay(Group {

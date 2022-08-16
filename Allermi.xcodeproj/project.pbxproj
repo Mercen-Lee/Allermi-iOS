@@ -27,6 +27,7 @@
 		93D08F86287FC43300DF9E9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D08F85287FC43300DF9E9F /* ContentView.swift */; };
 		93D08F88287FC48900DF9E9F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D08F87287FC48900DF9E9F /* Launch Screen.storyboard */; };
 		93D2B02228A8B9E300807FEC /* Secret.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 93D2B02128A8B9E300807FEC /* Secret.mp3 */; };
+		93D2B02528AB60B400807FEC /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 93D2B02428AB60B400807FEC /* WrappingHStack */; };
 		93D71DB72885324B00F9DA52 /* SearchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D71DB62885324B00F9DA52 /* SearchedView.swift */; };
 		93EC3BC4289ABF6E003A8CCF /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 93EC3BC3289ABF6E003A8CCF /* CodeScanner */; };
 		BDD2424CA6902563472DE799 /* Pods_Allermi_AllermiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7770B6B3EC8103AE9A216159 /* Pods_Allermi_AllermiUITests.framework */; };
@@ -90,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93EC3BC4289ABF6E003A8CCF /* CodeScanner in Frameworks */,
+				93D2B02528AB60B400807FEC /* WrappingHStack in Frameworks */,
 				7656E74EF567AE7CD7E1522D /* Pods_Allermi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +253,7 @@
 			name = Allermi;
 			packageProductDependencies = (
 				93EC3BC3289ABF6E003A8CCF /* CodeScanner */,
+				93D2B02428AB60B400807FEC /* WrappingHStack */,
 			);
 			productName = Allermi;
 			productReference = 936655C1287B9EE400277FC6 /* 알레르미.app */;
@@ -329,6 +332,7 @@
 			mainGroup = 936655B8287B9EE400277FC6;
 			packageReferences = (
 				93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				93D2B02328AB60B400807FEC /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 936655C2287B9EE400277FC6 /* Products */;
 			projectDirPath = "";
@@ -829,6 +833,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		93D2B02328AB60B400807FEC /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -840,6 +852,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		93D2B02428AB60B400807FEC /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 93D2B02328AB60B400807FEC /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		93EC3BC3289ABF6E003A8CCF /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 93EC3BC2289ABF6E003A8CCF /* XCRemoteSwiftPackageReference "CodeScanner" */;

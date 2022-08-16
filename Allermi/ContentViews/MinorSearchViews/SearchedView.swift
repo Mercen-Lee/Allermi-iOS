@@ -44,17 +44,12 @@ struct SearchedView: View {
     }
     func loadMyInfo() {
         AF.request("\(api)/sign", method: .get, encoding: URLEncoding.default, headers: ["ACCESS_TOKEN": UserDefaults.standard.string(forKey: "token")!, "Content-Type": "application/json"])
-                .responseData { response in
-//                    print(UserDefaults.standard.string(forKey: "token")!)
-//                    print(String(decoding: response.data!, as: UTF8.self))
-                    AF.request("\(api)/sign/user/\(String(data: response.data!, encoding: .utf8)!)", method: .get, parameters: ["ACCESS_TOKEN": UserDefaults.standard.string(forKey: "token")!], encoding: URLEncoding.default, headers: ["Content-Type": "application/json"])
-                        .responseData { response in
-                            print(String(decoding: response.data!, as: UTF8.self))
-                            guard let value = response.value else { return }
-                            guard let result = try? decoder.decode(UserInfo.self, from: value) else { return }
-                            self.userAllergy = result.allergy
-                        }
-                }
+            .responseData { response in
+                //print(String(decoding: response.data!, as: UTF8.self))
+                guard let value = response.value else { return }
+                guard let result = try? decoder.decode(UserInfo.self, from: value) else { return }
+                self.userAllergy = result.allergy
+        }
     }
     func checkDuplicated(_ arr: String) -> [String] {
         var result = [String]()
