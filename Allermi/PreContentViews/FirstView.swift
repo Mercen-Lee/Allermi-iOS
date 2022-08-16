@@ -66,8 +66,8 @@ struct FirstView: View {
             }
             .padding(20)
             .navigationBarTitle("")
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 

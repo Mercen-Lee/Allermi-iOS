@@ -19,6 +19,7 @@ extension View {
 }
 
 struct ContentView: View {
+    @State var logout = false
     @State var selectedIndex = 2
     let icons = ["house.fill", "bubble.left.and.bubble.right.fill", "magnifyingglass", "heart.text.square.fill", "person.fill"]
     let names = ["홈", "소통", "", "상태", "프로필"]
@@ -29,6 +30,7 @@ struct ContentView: View {
     }
     var body: some View {
         ZStack {
+            NavigationLink(destination: FirstView(), isActive: $logout) { EmptyView() }
             ZStack {
                 Spacer()
                 switch selectedIndex {
@@ -37,7 +39,7 @@ struct ContentView: View {
                     case 2: SearchView()
                         .padding(.bottom, scs < 800 ? scs/10 : scs/12)
                     case 3: HealthView()
-                    default: ProfileView()
+                    default: ProfileView(logout: $logout)
                 }
             }
             VStack(spacing: 0) {

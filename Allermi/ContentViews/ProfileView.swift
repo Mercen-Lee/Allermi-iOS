@@ -12,6 +12,7 @@ import WrappingHStack
 struct ProfileView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var userId = ""
+    @Binding var logout: Bool
     @State var selectedAllergy = [String]()
     @State var relatedAllergy = [String]()
     @State var viewLists = [String]()
@@ -68,10 +69,10 @@ struct ProfileView: View {
                 .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
                 .listRowInsets(EdgeInsets())
                 .buttonStyle(PlainButtonStyle())
-                .padding(.bottom, 10)
                 VStack(alignment: .leading) {
                     WrappingHStack(viewLists) { idx in
                         Button(action: {
+                            
                             if selectedAllergy.contains(chooseMajor(idx)) {
                                 selectedAllergy = selectedAllergy.filter(){$0 != chooseMajor(idx)}
                                 for i in chooseString(chooseMajor(idx)) {
@@ -116,17 +117,20 @@ struct ProfileView: View {
                     .buttonStyle(PlainButtonStyle())
                     .padding(.bottom, 10)
                 
-                Button(action: { }) {
+                Button(action: {
+                    UserDefaults.standard.removeObject(forKey: "token")
+                    logout.toggle()
+                }) {
                     HStack {
                         Text("로그아웃")
                             .padding(.leading, 20)
                         Spacer()
                     }
-                }
-                    .listRowSeparator(.hidden)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity)
                     .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
+                }
+                    .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets())
                     .buttonStyle(PlainButtonStyle())
                     .padding(.bottom, 10)
@@ -161,8 +165,8 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView()
+//    }
+//}
