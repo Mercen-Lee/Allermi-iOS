@@ -108,11 +108,11 @@ struct ProfileView: View {
                             .padding(.leading, 20)
                         Spacer()
                     }
-                }
-                    .listRowSeparator(.hidden)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity)
                     .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
+                }
+                    .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets())
                     .buttonStyle(PlainButtonStyle())
                     .padding(.bottom, 10)
@@ -142,11 +142,11 @@ struct ProfileView: View {
                             .foregroundColor(.accentColor)
                         Spacer()
                     }
-                }
-                    .listRowSeparator(.hidden)
                     .frame(height: 50)
                     .frame(maxWidth: .infinity)
                     .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
+                }
+                    .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets())
                     .buttonStyle(PlainButtonStyle())
                     .padding(.bottom, 100)
