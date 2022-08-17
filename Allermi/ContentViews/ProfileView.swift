@@ -102,21 +102,6 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity)
                 .listRowInsets(EdgeInsets())
                 .buttonStyle(PlainButtonStyle())
-                Button(action: { }) {
-                    HStack {
-                        Text("비밀번호 변경")
-                            .padding(.leading, 20)
-                        Spacer()
-                    }
-                    .frame(height: 50)
-                    .frame(maxWidth: .infinity)
-                    .background(Color("GrayColor").opacity(colorScheme == .dark ? 0.7 : 0.9))
-                }
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets())
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.bottom, 10)
-                
                 Button(action: {
                     UserDefaults.standard.removeObject(forKey: "token")
                     logout.toggle()

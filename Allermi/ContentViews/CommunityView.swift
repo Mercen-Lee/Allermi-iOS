@@ -18,11 +18,16 @@ struct CommunityDatas: Decodable {
 }
 
 let dummyData: [CommunityDatas] = [
-    CommunityDatas(id: 1, author: "jjjombi", body: "안뇽~", image: "https://herb-api.hankookilbo.com/api/attaches/image/group/3afb106a-5b5f-466e-8c8d-e1f7be42495c", likes: 20, liked: true, date: "2022년 8월 7일"),
-    CommunityDatas(id: 2, author: "HINU", body: "양꼬치엔 칭따오", image: "http://kor.theasian.asia/wp-content/uploads/2020/06/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-2020-06-05T084841.330.jpg", likes: 0, liked: false, date: "2022년 8월 7일")
+    CommunityDatas(id: 1, author: "Majora", body: "누텔라에 헤이즐넛 들어있대요.. 먹었으면 큰일날 뻔 했네요!", image: "http://res.heraldm.com/phpwas/restmb_idxmake.php?idx=507&simg=/content/image/2018/03/26/20180326000863_0.jpg", likes: 20, liked: true, date: "2022년 8월 7일"),
+    CommunityDatas(id: 2, author: "Saria", body: "향긋한 바질 페스토에는 사실 잣이 들어가 있다는 사실, 아셨나요?", image: "https://recipe1.ezmember.co.kr/cache/recipe/2015/06/09/26d4ce4ad73291e4040ec53434582c24.jpg", likes: 5, liked: false, date: "2022년 8월 7일")
 ]
 
 struct CommunityView: View {
+    
+    @State private var imagePickerPresented = false
+    @State private var selectedImage: UIImage?
+    @State private var profileImage: Image?
+    
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationView {
@@ -50,6 +55,7 @@ struct CommunityView: View {
                         Text(dummyData[idx].body)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding([.leading, .trailing], 20)
+                            .padding(.top, 5)
                         VStack(alignment: .trailing) {
                             AsyncImage(url: URL(string: dummyData[idx].image)) { image in
                                 image
@@ -81,11 +87,13 @@ struct CommunityView: View {
             .listStyle(PlainListStyle())
             .navigationTitle("소통")
             .navigationBarItems(trailing: Button(action: {
-                
+                imagePickerPresented.toggle()
             }) {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(.accentColor)
             })
+            .sheet(isPresented: $imagePickerPresented,
+                   content: { ImagePicker(image: $selectedImage) })
             .refreshable { }
         }
     }
@@ -96,6 +104,39 @@ struct CommunityWriteView: View {
         Text("a")
     }
 }
+
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var image: UIImage?
+    @Environment(\.presentationMode) var mode
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    }
+    
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: ImagePicker
+        
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            guard let image = info[.originalImage] as? UIImage else { return }
+            self.parent.image = image
+            self.parent.mode.wrappedValue.dismiss()
+        }
+    }
+}
+
 struct CommunityView_Previews: PreviewProvider {
     static var previews: some View {
         CommunityWriteView()//.preferredColorScheme(.dark)

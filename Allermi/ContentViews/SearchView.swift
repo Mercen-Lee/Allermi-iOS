@@ -144,8 +144,8 @@ struct SearchView: View {
                     }
                 NavigationLink(destination: SearchedView(searchKeyword: text), isActive: $search) { EmptyView() }
                 HStack {
-                    Button(action: { barcodeSearch.toggle() }) {
-                        SearchOption(icon: "location.fill", title: "위치")
+                    Button(action: { }) {
+                        SearchOption(icon: "info.circle.fill", title: "도움말")
                     }
                     Button(action: { barcodeSearch.toggle() }) {
                         SearchOption(icon: "barcode", title: "바코드")

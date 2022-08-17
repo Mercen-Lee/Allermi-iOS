@@ -22,7 +22,7 @@ struct ContentView: View {
     @State var logout = false
     @State var selectedIndex = 2
     let icons = ["house.fill", "bubble.left.and.bubble.right.fill", "magnifyingglass", "heart.text.square.fill", "person.fill"]
-    let names = ["홈", "소통", "", "상태", "프로필"]
+    let names = ["홈", "소통", "", "의료", "프로필"]
     init() {
         UITableView.appearance().backgroundColor = .systemBackground
         UITableView.appearance().allowsSelection = false
@@ -85,6 +85,8 @@ struct ContentView: View {
             .navigationBarHidden(true)
             .navigationTitle("")
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 
